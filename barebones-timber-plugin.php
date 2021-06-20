@@ -18,12 +18,10 @@ defined('ABSPATH') || exit;
 
 // define some constants
 if (!defined('BAREBONES_TIMBER_PATH')) define('BAREBONES_TIMBER_PATH', plugin_dir_path( __FILE__ ));
+if (!defined('BAREBONES_TIMBER_VIEWS')) define('BAREBONES_TIMBER_VIEWS', plugin_dir_path( __FILE__ ).'views');
 
-// We require the composer autoloader
+// require the composer autoloader
 if (file_exists($composer_autoload = __DIR__.'/vendor/autoload.php')) require_once $composer_autoload;
 
-// allows for custom page templates that can be selected via page attributes
-require(BAREBONES_TIMBER_PATH . 'inc/custom-page-templater.php');
-
-// require the main plugin class. this class extends Timber/Timber which is required via composer
-require(BAREBONES_TIMBER_PATH . 'inc/core.php');
+// then require the main plugin class. this class extends Timber/Timber which is required via composer
+new Rmcc\BarebonesTimber;

@@ -1,5 +1,13 @@
 {% extends 'page.twig' %}
 
-{% block content %}
-  Hello
+{% block contentwrap %}
+  <section class="id-{{post.id}}  content-wrap uk-section uk-section-small" data-template="hello.twig">
+    <div class="content-container uk-container">
+      Hello, this is a custom page template via our plugin.<br>
+      This is a theme global twig variable: {{dashboard_endpoint}}<br>
+      This is the site name {{site.name}}<br>
+      This is the post title {{post.title}}<br>
+      This is some plugin data {{some_plugin_data}}<br>
+    </div>
+  </section>
 {% endblock %}

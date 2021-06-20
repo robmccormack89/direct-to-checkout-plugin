@@ -2,7 +2,7 @@
 /**
  * Template Name: Hello Page Template
  *
- * @package Cautious_Octo_Fiesta
+ * @package BarebonesTimber
  */
 
 $context = Timber::context();

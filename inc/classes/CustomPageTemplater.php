@@ -1,4 +1,5 @@
 <?php
+namespace Rmcc;
 
 class CustomPageTemplater {
 
@@ -31,7 +32,6 @@ class CustomPageTemplater {
 	private function __construct() {
 
 		$this->templates = array();
-
 
 		// Add a filter to the attributes metabox to inject template into the cache.
 		if ( version_compare( floatval( get_bloginfo( 'version' ) ), '4.7', '<' ) ) {
@@ -68,7 +68,7 @@ class CustomPageTemplater {
 
 		// Add your templates to this array.
 		$this->templates = array(
-      'hello-page-template.php' => 'Hello Page Template',
+      'hello-template.php' => 'Hello Template',
 		);
 			
 	} 
@@ -77,7 +77,7 @@ class CustomPageTemplater {
 	 * Adds our template to the page dropdown for v4.7+
 	 *
 	 */
-	public function add_new_template( $posts_templates ) {
+	public function add_new_template($posts_templates) {
 		$posts_templates = array_merge( $posts_templates, $this->templates );
 		return $posts_templates;
 	}
@@ -86,7 +86,7 @@ class CustomPageTemplater {
 	 * Adds our template to the pages cache in order to trick WordPress
 	 * into thinking the template file exists where it doens't really exist.
 	 */
-	public function register_project_templates( $atts ) {
+	public function register_project_templates($atts) {
 
 		// Create the key used for the themes cache
 		$cache_key = 'page_templates-' . md5( get_theme_root() . '/' . get_stylesheet() );
@@ -116,7 +116,7 @@ class CustomPageTemplater {
 	/**
 	 * Checks if the template is assigned to the page
 	 */
-	public function view_project_template( $template ) {
+	public function view_project_template($template) {
 		
 		// Get global post
 		global $post;
@@ -150,4 +150,3 @@ class CustomPageTemplater {
 	}
 
 } 
-add_action( 'plugins_loaded', array( 'CustomPageTemplater', 'get_instance' ) );
