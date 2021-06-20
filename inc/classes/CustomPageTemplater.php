@@ -9,7 +9,6 @@ class CustomPageTemplater {
 	// The array of templates that this plugin tracks.
 	protected $templates;
 
-
 	// Returns an instance of this class. 
 	public static function get_instance() {
 
@@ -20,7 +19,6 @@ class CustomPageTemplater {
 		return self::$instance;
 
 	} 
-
 
 	// Initializes the plugin by setting filters and administration functions.
 	private function __construct() {
@@ -67,13 +65,11 @@ class CustomPageTemplater {
 
 	} 
 
-
 	// Adds our template to the page dropdown for v4.7+
 	public function add_new_template($posts_templates) {
 		$posts_templates = array_merge( $posts_templates, $this->templates );
 		return $posts_templates;
 	}
-
 
 	// Adds our template to the pages cache in order to trick WordPress
 	// into thinking the template file exists where it doens't really exist.
@@ -103,7 +99,6 @@ class CustomPageTemplater {
 		return $atts;
 
 	} 
-
 
 	// Checks if the template is assigned to the page
 	public function view_project_template($template) {
