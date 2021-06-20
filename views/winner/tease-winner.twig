@@ -1,0 +1,48 @@
+{# translation-ready, escaped, formatted, semantic #}
+<article id="post-{{post.id|e('esc_html')}}" class="tease-post tease-winner {{post.class|e('esc_html')}}"  data-template="tease-winners.twig">
+  <div class="uk-card uk-box-shadow-small uk-box-shadow-hover-medium">
+
+    {# winner tease featured image #}
+    {% if post.get_thumbnail %}
+      <div class="uk-card-media-top">
+        <a uk-toggle="target: #modal-winner-{{post.id|e('esc_html')}}">
+          <img data-src="{{ post.thumbnail.src|resize(500, 300)|e('esc_url') }}" width="500" height="300" alt="{{ post.thumbnail.alt|e('esc_html') }}" uk-img>
+        </a>
+      </div>
+    {% endif %}
+    
+    {# winner tease content #}
+    <div class="uk-card-body uk-padding-small fat-border-top">
+      <a class="uk-link-reset" uk-toggle="target: #modal-winner-{{post.id|e('esc_html')}}">
+        <h3 class="uk-h5 uk-margin-small-top">{{post.title|e('esc_html')}}</h3>
+      </a>
+      <p>{{post.date | date}}</p>
+    </div>
+    
+  </div>
+</article>
+
+{# comp winner popup #}
+<div id="modal-winner-{{post.id|e('esc_html')}}" class="uk-flex-top uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-margin-auto-vertical">
+    <button class="uk-modal-close-default uk-icon uk-close" type="button" uk-close></button>
+    
+    {# winner popup title #}
+    <div class="uk-modal-header fat-border-bottom">
+      <h2 class="uk-modal-title">{{post.title|e('esc_html')}}</h2>
+    </div>
+    
+    {# winner popup featured image #}
+    {% if post.thumbnail %}
+      <div class="fat-border-bottom">
+        <img data-src="{{ post.thumbnail.src|resize(800, 300)|e('esc_url') }}" width="800" height="300" alt="{{ post.thumbnail.alt|e('esc_html') }}" uk-img>
+      </div>
+    {% endif %}
+    
+    {# winner popup content #}
+    <div class="uk-modal-body">
+      <p>{{post.content}}</p>
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,23 @@
+{# translation-ready, escaped, formatted, semantic #}
+<article id="EntryList-{{post.id|e('esc_html')}}" class="tease-post tease-entry-list {{post.class|e('esc_html')}}"  data-template="tease-entry_lists.twig">
+  <div class="uk-card uk-background-muted uk-box-shadow-hover-small">
+    <div class="uk-card-body uk-padding-small fat-border-top">
+      
+      {# entry list title #}
+      <h3 class="uk-card-title uk-margin-remove-top">{{post.title|e('esc_html')}}</h3>
+      
+      {# entry list meta #}
+      <p class="uk-text-meta">
+        {{ _x('Published:', 'Entry list tease', 'cautious-octo-fiesta')|e('esc_html') }} {{post.date | date}}
+        {% if post.draw_date %}
+          <br>
+          {{ _x('Draw date:', 'Entry list tease', 'cautious-octo-fiesta')|e('esc_html') }} {{post.draw_date|e('esc_html')}}
+        {% endif %}
+      </p>
+      
+      {# entry list download button #}
+      <a href="{{pdf_upload_url|e('esc_url')}}" class="uk-button uk-button-default uk-button-small" download>{{ _x('Download PDF', 'Entry list tease', 'cautious-octo-fiesta')|e('esc_html') }}</a>
+      
+    </div>
+  </div>
+</article>

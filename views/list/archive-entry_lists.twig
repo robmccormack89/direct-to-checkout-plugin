@@ -1,0 +1,23 @@
+{# translation-ready, escaped, formatted, semantic #}
+{% extends "archive.twig" %}
+
+{% block contentwrap %}
+  <section class="uk-section" data-template="archive-entry_lists.twig">
+    <div class="uk-container uk-container-large">
+      <div class="archive-posts uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid>
+        {% if posts is not empty %}
+          {% for post in posts %}
+            {% include 'tease-list.twig' %}
+          {% endfor %}
+        {% else %}
+          No entry lists posted yet...
+        {% endif %}
+      </div>
+    </div>
+    {% if (pagination.next or pagination.prev) %}
+      <div class="uk-margin-large-top">
+        {% include 'pagination.twig' %}
+      </div>
+    {% endif %}
+  </section>
+{% endblock %}
