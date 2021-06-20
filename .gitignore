@@ -1,0 +1,10 @@
+node_modules/
+.sass-cache/
+vendor/
+compilation_cache/
+package.lock
+package-lock.json
+composer.lock
+yarn.lock
+.git
+.ftp-config
