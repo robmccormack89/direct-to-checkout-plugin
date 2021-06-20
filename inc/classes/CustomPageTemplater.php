@@ -3,19 +3,14 @@ namespace Rmcc;
 
 class CustomPageTemplater {
 
-	/**
-	 * A reference to an instance of this class.
-	 */
+	// A reference to an instance of this class.
 	private static $instance;
 
-	/**
-	 * The array of templates that this plugin tracks.
-	 */
+	// The array of templates that this plugin tracks.
 	protected $templates;
 
-	/**
-	 * Returns an instance of this class. 
-	 */
+
+	// Returns an instance of this class. 
 	public static function get_instance() {
 
 		if ( null == self::$instance ) {
@@ -26,9 +21,8 @@ class CustomPageTemplater {
 
 	} 
 
-	/**
-	 * Initializes the plugin by setting filters and administration functions.
-	 */
+
+	// Initializes the plugin by setting filters and administration functions.
 	private function __construct() {
 
 		$this->templates = array();
@@ -68,24 +62,21 @@ class CustomPageTemplater {
 
 		// Add your templates to this array.
 		$this->templates = array(
-      'hello-template.php' => 'Hello Template',
+			'hello-template.php' => 'Hello Template',
 		);
-			
+
 	} 
 
-	/**
-	 * Adds our template to the page dropdown for v4.7+
-	 *
-	 */
+
+	// Adds our template to the page dropdown for v4.7+
 	public function add_new_template($posts_templates) {
 		$posts_templates = array_merge( $posts_templates, $this->templates );
 		return $posts_templates;
 	}
 
-	/**
-	 * Adds our template to the pages cache in order to trick WordPress
-	 * into thinking the template file exists where it doens't really exist.
-	 */
+
+	// Adds our template to the pages cache in order to trick WordPress
+	// into thinking the template file exists where it doens't really exist.
 	public function register_project_templates($atts) {
 
 		// Create the key used for the themes cache
@@ -113,11 +104,10 @@ class CustomPageTemplater {
 
 	} 
 
-	/**
-	 * Checks if the template is assigned to the page
-	 */
+
+	// Checks if the template is assigned to the page
 	public function view_project_template($template) {
-		
+
 		// Get global post
 		global $post;
 
@@ -132,10 +122,10 @@ class CustomPageTemplater {
 		)] ) ) {
 			return $template;
 		} 
-    
-    $file = BAREBONES_TIMBER_PATH.'page-templates/' .get_post_meta( 
-    	$post->ID, '_wp_page_template', true 
-    );
+
+		$file = BAREBONES_TIMBER_PATH.'page-templates/' .get_post_meta( 
+			$post->ID, '_wp_page_template', true 
+		);
 
 		// Just to be safe, we check if the file exist first
 		if ( file_exists( $file ) ) {
