@@ -10,6 +10,7 @@
 * Classes list:
 * - CustomPageTemplater
 */
+
 namespace Rmcc;
 
 class CustomPageTemplater {
