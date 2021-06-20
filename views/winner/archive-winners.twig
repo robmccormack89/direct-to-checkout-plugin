@@ -1,0 +1,23 @@
+{# translation-ready, escaped, formatted, semantic #}
+{% extends "archive.twig" %}
+
+{% block contentwrap %}
+  <section class="uk-section" data-template="archive-winners.twig">
+    <div class="uk-container uk-container-large">
+      <div class="archive-posts uk-child-width-1-2@s uk-child-width-1-4@m" uk-grid="masonry:true;">
+        {% if posts is not empty %}
+          {% for post in posts %}
+            {% include 'tease-winner.twig' %}
+          {% endfor %}
+        {% else %}
+          No competition winners posted yet...
+        {% endif %}
+      </div>
+    </div>
+    {% if (pagination.next or pagination.prev) %}
+      <div class="uk-margin-large-top">
+        {% include 'pagination.twig' %}
+      </div>
+    {% endif %}
+  </section>
+{% endblock %}
