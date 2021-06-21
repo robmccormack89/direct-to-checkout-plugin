@@ -1,0 +1,16 @@
+{
+  "name": "competitions-theme-functionality",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
+    "gulp-wp-pot": "^2.2.0",
+    "del": "^3.0.0"
+  },
+  "scripts": {
+    "gulp": "./node_modules/.bin/gulp",
+    "twig-pot": "gulp pot"
+  }
+}

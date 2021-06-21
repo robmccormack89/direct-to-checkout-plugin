@@ -1,3 +1,3 @@
-# Barebones Timber Plugin.
+# Direct to Checkout
 
-An empty Wordpress plugin working with timber/timber.
+Allows for an optimized woocommerce chekout experience. Dont't forget to disable the basket page in Woocommerce Settings -> Advanced.

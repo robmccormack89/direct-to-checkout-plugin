@@ -1,0 +1,89 @@
+# Copyright (C) 2021 direct-to-checkout
+# This file is distributed under the same license as the direct-to-checkout package.
+msgid ""
+msgstr ""
+"Project-Id-Version: direct-to-checkout\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: inc/DirectToCheckout.php:165
+msgctxt "Checkout"
+msgid "Remove this item"
+msgstr ""
+
+#: views/temp/form-checkout.php:21
+msgctxt "Checkout"
+msgid "Your order"
+msgstr ""
+
+#: views/temp/form-checkout.php:30
+msgctxt "Checkout"
+msgid "You must be logged in to checkout."
+msgstr ""
+
+#: views/temp/form-checkout.php:52
+msgctxt "Checkout"
+msgid "Billing"
+msgstr ""
+
+#: views/temp/form-checkout.php:53
+msgctxt "Checkout"
+msgid "Payment"
+msgstr ""
+
+#: views/temp/form-checkout.php:57
+msgctxt "Checkout"
+msgid "Information"
+msgstr ""
+
+#: views/temp/form-checkout.php:58
+msgctxt "Checkout"
+msgid "Welcome back"
+msgstr ""
+
+#: views/temp/form-checkout.php:70
+msgctxt "Checkout"
+msgid "Go back"
+msgstr ""
+
+#: views/temp/form-checkout.php:71
+msgctxt "Checkout"
+msgid "Proceed to payment"
+msgstr ""
+
+#: views/temp/form-checkout.php:102
+msgctxt "Checkout"
+msgid "Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements."
+msgstr ""
+
+#: views/temp/form-checkout.php:104
+msgctxt "Checkout"
+msgid "Please fill in your details above to see available payment methods."
+msgstr ""
+
+#: views/temp/form-checkout.php:116
+msgctxt "Checkout"
+msgid "Since your browser does not support JavaScript, or it is disabled, please ensure you click the %1$sUpdate Totals%2$s button before placing your order. You may be charged more than the amount stated above if you fail to do so."
+msgstr ""
+
+#: views/temp/form-checkout.php:118, views/temp/form-checkout.php:118
+msgctxt "Checkout"
+msgid "Update totals"
+msgstr ""
+
+#: views/temp/form-checkout.php:125
+msgctxt "Checkout"
+msgid "Back to billing"
+msgstr ""
+
+#: views/temp/form-checkout.php:128, views/temp/form-checkout.php:128, views/temp/form-checkout.php:129
+msgctxt "Checkout"
+msgid "Place order"
+msgstr ""

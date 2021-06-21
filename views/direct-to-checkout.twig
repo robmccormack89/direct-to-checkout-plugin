@@ -1,0 +1,304 @@
+{# translation-ready, escaped, formatted, semantic #}
+{% extends "page.twig" %}
+
+{% block styles %}
+  {# checkout specific styles #}
+  <style>
+    
+    /* small container modifiy */
+    .uk-container-small {
+      max-width: 1100px;
+    }
+    
+    /* checkout page split bg design */
+    @media (min-width: 960px){
+      .checkout-wrap:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: calc(50% - 170px);
+        height: 100%;
+        z-index: -1;
+        background-color: #f8f8f8;
+        border-left: 1px solid #e5e5e5;
+      }
+      .half-plus {
+        width: calc(50% + 170px);
+      }
+      .half-minus {
+        width: calc(50% - 170px);
+      }
+    }
+    
+    /* turn off messages */
+    /* .uk-section>.woocommerce-message, .woocommerce-message {
+      display: none;
+    } */
+    
+    /* order review table */
+    .woocommerce-form-coupon-toggle, .woocommerce-checkout-review-order-table {
+      font-size: 0.875em;
+    }
+    .uk-table-small td, .uk-table-small th {
+      padding: 6px 8px;
+    }
+    th.product-total, td.product-total  {
+      text-align: right;
+    }
+    .cart-subtotal td, .order-total td, .cart-discount td {
+      text-align: right;
+    }
+    
+    /* order panel */
+    .uk-panel-scrollable {
+      min-height: 60px;
+      height: fit-content;
+      max-height: 90vh;
+      transition: max-height 0.2s linear;
+      resize: vertical;
+    }
+    a.panel-target:before {
+      content: 'Down';
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font-family: "Font Awesome 5 Free"; 
+      font-weight: 900; 
+      content: "\f078";
+    }
+    a.panel-target.panel-collapsed:before {
+      content: "\f077";
+    }
+    .order-collapse {
+      margin-top: 5px;
+      margin-right: 5px;
+      line-height: 1rem;
+      background-color: #fff;
+      padding: 4px 6px;
+      border: 1px solid #efefef;
+    }
+    @media (max-width: 959px){
+      .panel-collapsed {
+        max-height: 60px;
+      }
+      #orderPanel {
+        background-color: #f8f8f8;
+      }
+      .checkout-header h3 {
+        display: none;
+      }
+      .checkout-wrap > .uk-section-small {
+        padding-bottom: 20px;
+        padding-top: 20px;
+      }
+    }
+    
+    /* billing form grid margins */
+    *+.uk-grid-margin-small, .uk-grid+.uk-grid-row-small, .uk-grid+.uk-grid-small, .uk-grid-row-small>.uk-grid-margin, .uk-grid-small>.uk-grid-margin {
+      margin-top: 8px;
+    }
+    
+    /* billing form required/s */
+    abbr.required {
+      color: #f0506e!important;
+    }
+    .validate-required label {
+      display: inline-block!important;
+    }
+    .req {
+      margin-left: 3px;
+    }
+    
+    /* billing payment checkout header nav */
+    .uk-subnav>*>:first-child {
+      text-transform: capitalize;
+    }
+    .uk-subnav-pill>*>:first-child {
+      background: none;
+      color: #008ce1;
+      padding: 0;
+      text-decoration: none;
+    }
+    .uk-subnav-pill>*>a:active, .uk-subnav-pill>*>a:focus, .uk-subnav-pill>*>a:hover {
+      background: none;
+      color: #008ce1;
+    }
+    .uk-subnav-pill>.uk-active>a, .uk-subnav-pill>.is-active>a {
+      background: none;
+      color: #b1b1b1;
+      cursor: not-allowed;
+      text-decoration: none;
+    }
+    
+    /* billing payment checkout header nav separator */
+    li.proceed-to-payment:before {
+      content: "\f105";
+      font-family: 'Font Awesome 5 Free';
+      position: absolute;
+      left: 15px;
+      top: 0;
+      font-size: 14px;
+      color: #969696;
+      font-weight: 900;
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    li.proceed-to-payment a {
+      margin-left: 15px;
+    }
+    
+  </style>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block mini_cart_popup %}
+{% endblock %}
+
+{% block contentwrap %}
+  {{post.content}}
+{% endblock %}
+
+{% block subscribe %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block shop_fixed_nav %}
+{% endblock %}
+
+{% block scripts %}
+  {# checkout specific scripts #}
+  <script type='text/javascript'>
+
+    // remove item from review_order with ajax
+    jQuery( function($){
+     if (typeof woocommerce_params === 'undefined') return false;
+     $(document).on('click', 'tr.cart_item a.remove', function(e) {
+       
+       the_items = $('.shop_table tbody tr').length;
+       
+       // if more than one items in cart, do the ajax remove. else do a normal remove (dedirects to competitions)
+       if(the_items > 1){
+         e.preventDefault();
+
+         var product_id = $(this).attr("data-product_id"),
+           cart_item_key = $(this).attr("data-cart_item_key"),
+           product_container = $(this).parents('.shop_table');
+
+         // Add loader
+         product_container.block({
+           message: null,
+           overlayCSS: {
+             background: '#fff',
+             opacity: 0.6
+           }
+         });
+
+         $.ajax({
+           type: 'POST',
+           dataType: 'json',
+           url: wc_checkout_params.ajax_url,
+           data: {
+             action: "product_remove",
+             product_id: product_id,
+             cart_item_key: cart_item_key
+           },
+           success: function(result) {
+             $('body').trigger('update_checkout');
+             // console.log(result);
+           }
+         });
+       }
+       
+     });
+    });
+    
+    // validate billing inputs before proceed to payment
+    jQuery(function($) {
+      // on click the nav / continue to payment button
+      $( ".proceed-to-payment" ).click(function(event) {
+    
+        // the the validate wrapper class & fields to check against
+        var fields = $(".validate-required")
+          .find("select, textarea, input")
+          .serializeArray();
+
+        // for each missing field
+        $.each(fields, function (i, field) {
+          
+          // set the required notification text that will appear
+          var req = "<span id=\"Req_"+ field.name +"\" class=\"req uk-text-danger uk-text-small\">This is a required field</span>";
+          
+          // if its an emtpy field
+          if (!field.value) {
+            
+            // stop the event! (proceeding to payment)
+            event.stopPropagation();
+            
+            // if the required notification text doesnt already exist
+            if( $("#Req_" + field.name).length == 0) {
+              // add the text after the label
+              $('label[for="'+field.name+'"]').after(req);
+            }
+            
+            // & add focus to the input to emphasize
+            $('label[for="'+field.name+'"]').focus();
+          } 
+          
+          // if the field has a value but may already have a required notifcation label, remove it 
+          if (field.value) {
+            $("#Req_" + field.name).remove();
+          } 
+          
+        });
+        
+      });
+    });
+    
+    // checkout customizations
+    jQuery(function($) {
+      function theCheckout() {
+        
+        // billing fields wrap; make a grid
+        $(".woocommerce-billing-fields__field-wrapper").attr("uk-grid", true).addClass("uk-child-width-1-1 uk-grid-small");
+        $(".woocommerce-billing-fields h3").addClass("uk-h4");
+        // first name & last name; side by side
+        $(".woocommerce-billing-fields .form-row-first").addClass("uk-width-1-2");
+        $(".woocommerce-billing-fields .form-row-last").addClass("uk-width-1-2");
+    
+        // order review table styles
+        $(".woocommerce-checkout-review-order-table").addClass("uk-table uk-table-divider uk-table-small uk-table-justify");
+    
+        // payment methods
+        $(".wc_payment_methods").addClass("uk-list uk-list-large uk-list-divider");
+    
+        // form inputs
+        $(".input-radio").addClass("uk-radio");
+        $(".input-text").addClass("uk-input uk-form-small");
+        $(".input-checkbox").addClass("uk-checkbox");
+        $("label").addClass("uk-form-label");
+        $("select").addClass("uk-select");
+        
+        // buttons
+        $(".checkout_coupon button").addClass("uk-button uk-button-default uk-button-small");
+        
+        // shipping
+        $("#shipping_method").addClass("uk-list");
+        
+      }
+      $("form.checkout").load(theCheckout());
+      $("body").on('DOMSubtreeModified', "form.checkout", theCheckout);
+    });
+    
+  </script>
+{% endblock %}
