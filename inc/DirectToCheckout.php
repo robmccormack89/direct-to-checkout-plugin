@@ -29,6 +29,15 @@ class DirectToCheckout extends Timber {
     
     // override the template (page.php) used for the checkout page
     add_filter('page_template', array($this, 'direct_to_checkout_template'));
+    
+    // remove custom add_custom_demo_store_notice from custom store notice plugin only on checkout. use teplate redirect to access is_checkout()
+    add_action('template_redirect', array($this, 'remove_custom_store_notice_on_checkout'));
+  }
+  
+  public function remove_custom_store_notice_on_checkout() {
+    if(is_checkout()){
+      remove_action('rmcc_before_header', 'add_custom_demo_store_notice', 10);
+    }
   }
   
   public function direct_to_checkout_template($page_template) {
@@ -86,6 +95,7 @@ class DirectToCheckout extends Timber {
   }
 
   public function add_to_context($context) {
+    $context['plugin_url'] = DIRECT_TO_CHECKOUT_URL;
     return $context;    
   }
 
@@ -192,7 +202,7 @@ class DirectToCheckout extends Timber {
 
   public function direct_to_checkout_js() {
     global $wp_scripts;
-    $wp_scripts->registered[ 'wc-checkout' ]->src = get_template_directory_uri() . '/assets/js/checkout.js';
+    $wp_scripts->registered[ 'wc-checkout' ]->src = DIRECT_TO_CHECKOUT_URL . 'public/js/checkout.js';
   }
   
   public function wc_remove_checkout_fields($fields) {
@@ -253,4 +263,3 @@ class DirectToCheckout extends Timber {
   }
 
 }
-new DirectToCheckout;

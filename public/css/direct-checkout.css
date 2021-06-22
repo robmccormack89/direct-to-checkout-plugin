@@ -1,0 +1,140 @@
+/* smaller container */
+.uk-container-small {
+  max-width: 1100px;
+}
+/* checkout page split bg design */
+@media (min-width: 960px){
+  .checkout-wrap:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: calc(50% - 170px);
+    height: 100%;
+    z-index: -1;
+    background-color: #f8f8f8;
+    border-left: 1px solid #e5e5e5;
+  }
+  .half-plus {
+    width: calc(50% + 170px);
+  }
+  .half-minus {
+    width: calc(50% - 170px);
+  }
+}
+/* order review table */
+.woocommerce-form-coupon-toggle, .woocommerce-checkout-review-order-table {
+  font-size: 0.875em;
+}
+.uk-table-small td, .uk-table-small th {
+  padding: 6px 8px;
+}
+th.product-total, td.product-total  {
+  text-align: right;
+}
+.cart-subtotal td, .order-total td, .cart-discount td {
+  text-align: right;
+}
+/* order panel */
+.uk-panel-scrollable {
+  min-height: 60px;
+  height: fit-content;
+  max-height: 90vh;
+  transition: max-height 0.2s linear;
+  resize: vertical;
+}
+a.panel-target:before {
+  content: 'Down';
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900; 
+  content: "\f078";
+}
+a.panel-target.panel-collapsed:before {
+  content: "\f077";
+}
+.order-collapse {
+  margin-top: 5px;
+  margin-right: 5px;
+  line-height: 1rem;
+  background-color: #fff;
+  padding: 4px 6px;
+  border: 1px solid #efefef;
+}
+@media (max-width: 959px){
+  .panel-collapsed {
+    max-height: 60px;
+  }
+  #orderPanel {
+    background-color: #f8f8f8;
+  }
+  .checkout-header h3 {
+    display: none;
+  }
+  .checkout-wrap > .uk-section-small {
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+}
+/* billing form grid margins */
+*+.uk-grid-margin-small, 
+.uk-grid+.uk-grid-row-small, 
+.uk-grid+.uk-grid-small, 
+.uk-grid-row-small>.uk-grid-margin, 
+.uk-grid-small>.uk-grid-margin {
+  margin-top: 8px;
+}
+/* billing form required/s */
+abbr.required {
+  color: #f0506e!important;
+}
+.validate-required label {
+  display: inline-block!important;
+}
+.req {
+  margin-left: 3px;
+}
+/* billing payment checkout header nav */
+.uk-subnav>*>:first-child {
+  text-transform: capitalize;
+}
+.uk-subnav-pill>*>:first-child {
+  background: none;
+  color: #008ce1;
+  padding: 0;
+  text-decoration: none;
+}
+.uk-subnav-pill>*>a:active, .uk-subnav-pill>*>a:focus, .uk-subnav-pill>*>a:hover {
+  background: none;
+  color: #008ce1;
+}
+.uk-subnav-pill>.uk-active>a, .uk-subnav-pill>.is-active>a {
+  background: none;
+  color: #b1b1b1;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+/* billing payment checkout header nav separator */
+li.proceed-to-payment:before {
+  content: "\f105";
+  font-family: 'Font Awesome 5 Free';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  font-size: 14px;
+  color: #969696;
+  font-weight: 900;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+li.proceed-to-payment a {
+  margin-left: 15px;
+}
