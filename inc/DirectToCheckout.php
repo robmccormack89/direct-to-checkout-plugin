@@ -215,6 +215,7 @@ class DirectToCheckout extends Timber {
   public function remove_custom_store_notice_from_plugin_on_checkout() {
     if(is_checkout()){
       remove_action('rmcc_before_header', 'add_custom_demo_store_notice', 10);
+      remove_action('rmcc_before_footer', 'subscribe_html', 10);
     }
   }
   
