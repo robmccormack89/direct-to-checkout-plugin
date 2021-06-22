@@ -2,13 +2,10 @@
 {% extends "page.twig" %}
 
 {% block styles %}
-  <link type='text/css' rel="stylesheet" href="{{plugin_url}}public/css/direct-checkout.css" media='all' />
+  <link type='text/css' rel="stylesheet" href="{{direct_to_checkout_url}}public/css/direct-checkout.css" media='all' />
 {% endblock %}
 
 {% block header %}
-{% endblock %}
-
-{% block mini_cart_popup %}
 {% endblock %}
 
 {% block contentwrap %}
@@ -21,9 +18,6 @@
 {% block footer %}
 {% endblock %}
 
-{% block shop_fixed_nav %}
-{% endblock %}
-
 {% block scripts %}
-  <script type='text/javascript' src='{{plugin_url}}public/js/direct-checkout.js'></script>
+  <script type='text/javascript' src='{{direct_to_checkout_url}}public/js/direct-checkout.js'></script>
 {% endblock %}
