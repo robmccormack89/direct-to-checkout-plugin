@@ -19,10 +19,6 @@ class DirectToCheckout extends Timber {
     add_filter('timber/twig', array($this, 'add_to_twig'));
     add_filter('timber/context', array($this, 'add_to_context'));
     
-    // plugin stuff. these actions will be baked in
-    add_action('init', array($this, 'register_post_types'));
-    add_action('wp_enqueue_scripts', array($this, 'plugin_enqueue_assets'));
-    
     // after plugins are loaded, do the checkout stuff.
     // this is so other plugins have a chance to do their stuff first
     add_action('plugins_loaded', array($this, 'direct_to_checkout'));
@@ -97,14 +93,6 @@ class DirectToCheckout extends Timber {
   public function add_to_context($context) {
     $context['plugin_url'] = DIRECT_TO_CHECKOUT_URL;
     return $context;    
-  }
-
-  public function register_post_types() {
-    // register some post types
-  }
-
-  public function plugin_enqueue_assets() {
-    // enqueue some assets
   }
   
   public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
