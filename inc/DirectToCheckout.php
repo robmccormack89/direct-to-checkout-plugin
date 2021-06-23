@@ -11,7 +11,7 @@ class DirectToCheckout extends Timber {
     add_filter('timber/twig', array($this, 'add_to_twig'));
     add_filter('timber/context', array($this, 'add_to_context'));
     
-    // after plugins are loaded, do the checkout stuff. this is so other plugins have a chance to do their stuff first, including Woo!
+    // after plugins are loaded, do the checkout stuff. this is so other plugins have a chance to do their stuff first, including Woo! some actions require this
     add_action('plugins_loaded', array($this, 'on_plugins_loaded'));
     
     // override the template used for the checkout page. would be page.php from the theme but for this
