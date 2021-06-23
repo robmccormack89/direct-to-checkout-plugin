@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Direct to Checkout
+Plugin Name: Direct to Checkout for Woocommerce by RMcC
 Plugin URI: #
 Description: Allows for an optimized woocommerce chekout experience. Dont't forget to disable the basket page in woocommerce settngs -> advanced
 Version: 1.0.0
