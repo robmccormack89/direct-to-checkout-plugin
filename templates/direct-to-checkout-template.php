@@ -10,15 +10,6 @@
 
 // if not on checkout page, return
 if (!is_checkout()) return;
- 
-// if timber::locations is empty (another plugin hasn't already added to it), make it an array
-if(!Timber::$locations) Timber::$locations = array();
-
-// add a new views path to the locations array
-array_push(
-  Timber::$locations, 
-  DIRECT_TO_CHECKOUT_PATH . 'views'
-);
 
 // set the usual timber context
 $context = Timber::context();

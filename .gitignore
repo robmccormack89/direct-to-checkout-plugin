@@ -1,6 +1,5 @@
 node_modules/
 .sass-cache/
-vendor/
 compilation_cache/
 package.lock
 package-lock.json

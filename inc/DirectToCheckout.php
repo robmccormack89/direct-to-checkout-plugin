@@ -6,43 +6,44 @@ class DirectToCheckout extends Timber {
 
   public function __construct() {
     parent::__construct();
-    
-    // timber stuff. the usual stuff
     add_filter('timber/twig', array($this, 'add_to_twig'));
     add_filter('timber/context', array($this, 'add_to_context'));
+    
+    add_action('plugins_loaded', array($this, 'plugin_timber_locations'));
+    add_action('plugins_loaded', array($this, 'plugin_text_domain_init')); 
+    // add_action('wp_enqueue_scripts', array($this, 'plugin_enqueue_assets'));
+    
+    add_filter('wc_get_template', array($this, 'wc_get_template'), 10, 5);
     
     // after plugins are loaded, do the checkout stuff. this is so other plugins have a chance to do their stuff first, including Woo! some actions require this
     add_action('plugins_loaded', array($this, 'on_plugins_loaded'));
     
     // override the template used for the checkout page. would be page.php from the theme but for this
     add_filter('page_template', array($this, 'direct_to_checkout_template'));
-    
     // removes add_custom_demo_store_notice from Custom Store Notice plugin, but only on checkout.
     // we use use template_redirect to access is_checkout(). see https://codex.wordpress.org/Plugin_API/Action_Reference for more actions that can be used
     // this is useful for removing functions added to actions by other plugins
     // such functions which are added to theme via action hooks, need to be written outside the class
     // that way they can be removed as in remove_custom_store_notice_from_plugin_on_checkout
     add_action('template_redirect', array($this, 'remove_custom_store_notice_from_plugin_on_checkout'));
-    
-    // allow plugin's woo templates to override others
-    add_filter('wc_get_template', array($this, 'wc_get_template'), 10, 5); 
   }
   
-  // timber stuff. the usual stuff
-  public function add_to_twig($twig) { 
-    if(!class_exists('Twig_Extension_StringLoader')){
-      $twig->addExtension(new Twig_Extension_StringLoader());
+  // override the template used for the checkout page. would be page.php from the theme but for this
+  public function direct_to_checkout_template($page_template) {
+    // if is the checkout page, use the new template
+    if (is_checkout()) {
+      $page_template = DIRECT_TO_CHECKOUT_PATH . 'templates/direct-to-checkout-template.php';
     }
-    return $twig;
+    return $page_template;
   }
-  public function add_to_context($context) {
-    $context['direct_to_checkout_url'] = DIRECT_TO_CHECKOUT_URL;
-    // the last page
-    $context['back_link'] = $_SERVER['HTTP_REFERER'];
-    return $context;    
+  // that way they can be removed as in remove_custom_store_notice_from_plugin_on_checkout
+  public function remove_custom_store_notice_from_plugin_on_checkout() {
+    if(is_checkout()){
+      remove_action('rmcc_before_header', 'add_custom_demo_store_notice', 10);
+      remove_action('rmcc_before_footer', 'subscribe_html', 10);
+    }
   }
   
-  // after plugins are loaded, do the checkout stuff. this is so other plugins have a chance to do their stuff first, including Woo!
   public function on_plugins_loaded() {
     
     // remove basket button from minicart
@@ -81,7 +82,6 @@ class DirectToCheckout extends Timber {
     // if cart is empty, redirect to shop page
     add_action('template_redirect', array($this, 'cart_empty_redirect_to_shop'));
   }
-  
   // see on_plugins_loaded
   public function checkout_redirect_login() {
   
@@ -204,21 +204,17 @@ class DirectToCheckout extends Timber {
   	}
   }
   
-  // override the template used for the checkout page. would be page.php from the theme but for this
-  public function direct_to_checkout_template($page_template) {
-    // if is the checkout page, use the new template
-    if (is_checkout()) {
-      $page_template = DIRECT_TO_CHECKOUT_PATH . 'templates/direct-to-checkout-template.php';
-    }
-    return $page_template;
+  public function plugin_timber_locations() {
+    // if timber::locations is empty (another plugin hasn't already added to it), make it an array
+    if(!Timber::$locations) Timber::$locations = array();
+    // add a new views path to the locations array
+    array_push(
+      Timber::$locations, 
+      DIRECT_TO_CHECKOUT_PATH . 'views'
+    );
   }
-  
-  // that way they can be removed as in remove_custom_store_notice_from_plugin_on_checkout
-  public function remove_custom_store_notice_from_plugin_on_checkout() {
-    if(is_checkout()){
-      remove_action('rmcc_before_header', 'add_custom_demo_store_notice', 10);
-      remove_action('rmcc_before_footer', 'subscribe_html', 10);
-    }
+  public function plugin_text_domain_init() {
+    load_plugin_textdomain('direct-to-checkout', false, DIRECT_TO_CHECKOUT_BASE. '/languages');
   }
   
   // allow plugin's woo templates to override others
@@ -242,5 +238,19 @@ class DirectToCheckout extends Timber {
     }
 
     return $located;
+  }
+  
+  // timber stuff. the usual stuff
+  public function add_to_twig($twig) { 
+    if(!class_exists('Twig_Extension_StringLoader')){
+      $twig->addExtension(new Twig_Extension_StringLoader());
+    }
+    return $twig;
+  }
+  public function add_to_context($context) {
+    $context['direct_to_checkout_url'] = DIRECT_TO_CHECKOUT_URL;
+    // the last page
+    $context['back_link'] = $_SERVER['HTTP_REFERER'];
+    return $context;    
   }
 }

@@ -19,6 +19,7 @@ defined('ABSPATH') || exit;
 // define some constants
 if (!defined('DIRECT_TO_CHECKOUT_PATH')) define('DIRECT_TO_CHECKOUT_PATH', plugin_dir_path( __FILE__ ));
 if (!defined('DIRECT_TO_CHECKOUT_URL')) define('DIRECT_TO_CHECKOUT_URL', plugin_dir_url( __FILE__ ));
+if (!defined('DIRECT_TO_CHECKOUT_BASE')) define('DIRECT_TO_CHECKOUT_BASE', dirname(plugin_basename( __FILE__ )));
 
 // require the composer autoloader
 if (file_exists($composer_autoload = __DIR__.'/vendor/autoload.php')) require_once $composer_autoload;
