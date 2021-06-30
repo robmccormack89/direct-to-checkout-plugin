@@ -2,7 +2,7 @@
 /*
 Plugin Name: Direct to Checkout for Woocommerce by RMcC
 Plugin URI: #
-Description: Allows for an optimized woocommerce chekout experience. Dont't forget to disable the basket page in woocommerce settngs -> advanced
+Description: Allows for an optimized Woocommerce chekout experience, without the need for a basket. Dont't forget to disable the basket page in Woocommerce Settngs > Advanced. This plugin is translation-ready.
 Version: 1.0.0
 Author: robmccormack89
 Author URI: #
