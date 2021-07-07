@@ -667,7 +667,7 @@ jQuery( function( $ ) {
 					container.removeClass( 'processing' ).unblock();
 
 					if ( code ) {
-						// customized
+						// customized. changed the location of message after succesful remove. now appears before checkout coupon
 						$( '.checkout_coupon' ).before( code );
 
 						$( document.body ).trigger( 'removed_coupon_in_checkout', [ data.coupon_code ] );

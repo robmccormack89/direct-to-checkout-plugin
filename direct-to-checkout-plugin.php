@@ -26,3 +26,15 @@ if (file_exists($composer_autoload = __DIR__.'/vendor/autoload.php')) require_on
 
 // then require the main plugin class. this class extends Timber/Timber which is required via composer
 new Rmcc\DirectToCheckout;
+
+// initialize the assets class. for styles & scripts management
+new Rmcc\CheckoutAssets;
+
+// initialize the checkout fields class. for managing the checkout fields stuff
+new Rmcc\CheckoutFields;
+
+// initialize the order item removal class. for removing items from the order form via ajax
+new Rmcc\ProductRemove;
+
+// initialize the order item quantity select class. for changing order items quantity on checkout via ajax
+new Rmcc\ProductQuantity;

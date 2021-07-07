@@ -1,6 +1,6 @@
 // remove item from review_order with ajax
-jQuery( function($){
- if (typeof woocommerce_params === 'undefined') return false;
+jQuery(function($){
+
  $(document).on('click', 'tr.cart_item a.remove', function(e) {
    
    the_items = $('.shop_table tbody tr').length;
@@ -33,16 +33,17 @@ jQuery( function($){
        },
        success: function(result) {
          $('body').trigger('update_checkout');
-         // console.log(result);
        }
      });
    }
    
  });
+ 
 });
 
-// validate billing inputs before proceed to payment
-jQuery(function($) {
+// validate billing inputs before proceeding to payment tab
+// should also valiadte these inputs before proceeding from payment form, for cases where accidentally arrive to payment form before billing. can happen
+jQuery(function($){
   // on click the nav / continue to payment button
   $( ".proceed-to-payment" ).click(function(event) {
 
@@ -84,9 +85,8 @@ jQuery(function($) {
 });
 
 // checkout customizations
-jQuery(function($) {
+jQuery(function($){
   function theCheckout() {
-    
     // billing fields wrap; make a grid
     $(".woocommerce-billing-fields__field-wrapper").attr("uk-grid", true).addClass("uk-child-width-1-1 uk-grid-small");
     $(".woocommerce-billing-fields h3").addClass("uk-h4");
@@ -113,7 +113,63 @@ jQuery(function($) {
     // shipping
     $("#shipping_method").addClass("uk-list");
     
+    // quantity 
+    $(".product-name").addClass("uk-flex uk-flex-middle");
+    $(".quantity").addClass("uk-inline uk-flex-last uk-margin-small-left");
   }
   $("form.checkout").load(theCheckout());
   $("body").on('DOMSubtreeModified', "form.checkout", theCheckout);
+});
+
+// quantity ajax update
+jQuery(function($) {
+  $("form.checkout").on("click", "input.qty", function(e) {
+
+    var data = {
+      action: 'update_order_review',
+      security: wc_checkout_params.update_order_review_nonce,
+      post_data: $( 'form.checkout' ).serialize()
+    };
+
+    jQuery.post( add_quantity.ajax_url, data, function( response ) {
+      $('body').trigger('update_checkout');
+    });
+
+  });
+});
+
+// a nicer quantity select. this needs to be fired somehow on page load, then again each time the order review is update, & on each quantity select, but without bloody repeating
+jQuery(function($){
+  $('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input');
+  $('.quantity').each(function() {
+    var spinner = jQuery(this),
+      input = spinner.find('input[type="number"]'),
+      btnUp = spinner.find('.quantity-up'),
+      btnDown = spinner.find('.quantity-down'),
+      min = input.attr('min'),
+      max = input.attr('max');
+
+    btnUp.click(function() {
+      var oldValue = parseFloat(input.val());
+      if (oldValue >= max) {
+        var newVal = oldValue;
+      } else {
+        var newVal = oldValue + 1;
+      }
+      spinner.find("input").val(newVal);
+      spinner.find("input").trigger("change");
+    });
+
+    btnDown.click(function() {
+      var oldValue = parseFloat(input.val());
+      if (oldValue <= min) {
+        var newVal = oldValue;
+      } else {
+        var newVal = oldValue - 1;
+      }
+      spinner.find("input").val(newVal);
+      spinner.find("input").trigger("change");
+    });
+
+  });
 });
