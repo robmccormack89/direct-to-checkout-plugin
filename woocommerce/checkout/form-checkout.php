@@ -15,9 +15,7 @@
  * @version 3.5.0
 **/
 
-if (!defined('ABSPATH')) {
-	exit;
-}
+if (!defined('ABSPATH')) exit;
 
 /**
  * this is a custom checkout form template rendered with timber/twig. it overwrites woocommerce/templates/checkout/form-checkout.php
