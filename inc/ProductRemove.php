@@ -24,10 +24,12 @@ class ProductRemove {
       '<a href="%s" class="remove remove_from_cart_button_off" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s"><i class="fas fa-times"></i></a>',
       esc_url( wc_get_cart_remove_url($cart_item_key)),
       esc_attr_x('Remove this item', 'Checkout', 'direct-to-checkout'),
+      esc_attr($product_id),
+      esc_attr($cart_item_key),
       esc_attr($_product->get_sku())
-    ), $cart_item_key );
+    ), $cart_item_key);
     $product_name = '<span>' . $remove_link . '</span><span class="uk-margin-small-left item-name">' . $_product->get_name() .'</span>';
-    
+
     return $product_name;
   }
   
