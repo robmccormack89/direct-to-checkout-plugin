@@ -30,22 +30,22 @@ class CheckoutRedirects {
   // redirect to checkout from single product's add to cart; without the messages
   public function redirect_to_checkout_from_single() {
   
-  	global $woocommerce;
-  
-  	// Remove the default `Added to cart` message
-  	wc_clear_notices();
-  
-  	return $woocommerce->cart->get_checkout_url();
+    global $woocommerce;
+
+    // Remove the default `Added to cart` message
+    wc_clear_notices();
+
+    return $woocommerce->cart->get_checkout_url();
   
   }
   
   // if cart is empty, redirect to shop page
   public function cart_empty_redirect_to_shop() {
-  	if (!is_checkout()) return;
-  	if (0 == WC()->cart->get_cart_contents_count()) {
-  		wp_safe_redirect( get_permalink(woocommerce_get_page_id('shop')) );
-  		exit;
-  	}
+    if (!is_checkout()) return;
+    if (0 == WC()->cart->get_cart_contents_count()) {
+      wp_safe_redirect( get_permalink(woocommerce_get_page_id('shop')) );
+      exit;
+    }
   }
 
 }
