@@ -47,27 +47,28 @@ class CheckoutFields {
   }
   public function checkout_fields_pre_values($input, $key) {
     global $current_user;
-  
-  	switch ($key) :
-  		case 'billing_first_name':
-  		case 'shipping_first_name':
-  			return $current_user->first_name;
-  		break;
-  		
-  		case 'billing_last_name':
-  		case 'shipping_last_name':
-  			return $current_user->last_name;
-  		break;
-  
-  		case 'billing_email':
-  			return $current_user->user_email;
-  		break;
-  
-  		case 'billing_phone':
-  			return $current_user->phone;
-  		break;
-  
-  	endswitch;
+
+    switch ($key) :
+      
+      case 'billing_first_name':
+      case 'shipping_first_name':
+        return $current_user->first_name;
+      break;
+
+      case 'billing_last_name':
+      case 'shipping_last_name':
+        return $current_user->last_name;
+      break;
+
+      case 'billing_email':
+        return $current_user->user_email;
+      break;
+
+      case 'billing_phone':
+        return $current_user->phone;
+      break;
+
+    endswitch;
   }
   
 }
