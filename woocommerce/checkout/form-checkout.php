@@ -40,11 +40,11 @@ $context['cart'] = WC()->cart;
 $gateways = WC()->payment_gateways->get_available_payment_gateways();
 $enabled_gateways = [];
 if($gateways) {
-	foreach( $gateways as $gateway ) {
-		if( $gateway->enabled == 'yes' ) {
-			$enabled_gateways[] = $gateway;
-		}
-	}
+  foreach( $gateways as $gateway ) {
+    if( $gateway->enabled == 'yes' ) {
+      $enabled_gateways[] = $gateway;
+    }
+  }
 }
 $context['available_gateways'] = $enabled_gateways;
 
