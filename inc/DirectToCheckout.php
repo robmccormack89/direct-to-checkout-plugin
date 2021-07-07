@@ -53,8 +53,8 @@ class DirectToCheckout extends Timber {
     // if defult path deosnt exists, set it
     if (!$default_path) {
       global $woocommerce;
-  		$default_path = $woocommerce->plugin_path() . '/templates/';
-  	}
+      $default_path = $woocommerce->plugin_path() . '/templates/';
+    }
 
     $plugin_path = DIRECT_TO_CHECKOUT_PATH.'woocommerce/'.$template_name;
     
