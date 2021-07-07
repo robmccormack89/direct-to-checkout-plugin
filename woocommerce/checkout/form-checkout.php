@@ -13,9 +13,9 @@
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
  * @version 3.5.0
- */
+**/
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * woocommerce_checkout_billing is disabled in _details-billing.twig
  * used custom markup instead which is based off form-billing.php
  *
-**/
+*/
 
 $context = Timber::context();
 
@@ -43,9 +43,9 @@ $gateways = WC()->payment_gateways->get_available_payment_gateways();
 $enabled_gateways = [];
 if($gateways) {
 	foreach( $gateways as $gateway ) {
-	  if( $gateway->enabled == 'yes' ) {
-      $enabled_gateways[] = $gateway;
-	  }
+		if( $gateway->enabled == 'yes' ) {
+			$enabled_gateways[] = $gateway;
+		}
 	}
 }
 $context['available_gateways'] = $enabled_gateways;
