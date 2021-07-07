@@ -38,7 +38,9 @@ class DirectToCheckout extends Timber {
     // add a new views path to the locations array
     array_push(
       Timber::$locations, 
-      DIRECT_TO_CHECKOUT_PATH . 'views'
+      DIRECT_TO_CHECKOUT_PATH . 'views',
+      DIRECT_TO_CHECKOUT_PATH . 'views/checkout',
+      DIRECT_TO_CHECKOUT_PATH . 'views/checkout/details'
     );
   }
   public function plugin_text_domain_init() {
@@ -84,7 +86,10 @@ class DirectToCheckout extends Timber {
     // remove payments from order review. the markup for this is added back in manually. see direct-to-checkout.twig
     remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
     // disable order notes from the checkout
-    add_filter('woocommerce_enable_order_notes_field', '__return_false');
+    // add_filter('woocommerce_enable_order_notes_field', '__return_false');
+    
+    // Make “Create an account” to be default Checked
+    // add_filter('woocommerce_create_account_default_checked', '__return_true');
   }
   
 }

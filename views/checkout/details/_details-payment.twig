@@ -1,0 +1,64 @@
+<li class="checkout-content checkout-pay">
+  <div class="payments">
+    
+    {% if not fn('is_ajax') %}
+      {% do action('woocommerce_review_order_before_payment') %}
+    {% endif %}
+    
+    <div id="payment">
+      
+      {% if cart.needs_payment() %}
+        <ul class="wc_payment_methods payment_methods methods">
+          
+          {% if available_gateways %}
+            {% for gateway in available_gateways %}
+              {{ fn( 'wc_get_template', 'checkout/payment-method.php', {'gateway': gateway} ) }}
+            {% endfor %}
+          {% else %}
+            <li class="woocommerce-notice woocommerce-notice--info woocommerce-info">
+              {% filter apply_filters( 'woocommerce_no_available_payment_methods_message' ) %}
+                {% if customer.get_billing_country() %}
+                  {{ _x('Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'Checkout', 'direct-to-checkout')|e('esc_html') }}
+                {% else %}
+                  {{ _x('Please fill in your details above to see available payment methods.', 'Checkout', 'direct-to-checkout')|e('esc_html') }}
+                {% endif %}
+              {% endfilter %}
+            </li>
+          {% endif %}
+        </ul>
+      {% endif %}
+      
+      <div class="form-row place-order">
+        
+        <noscript>
+          {{ _x('Since your browser does not support JavaScript, or it is disabled, please ensure you click the %1$sUpdate Totals%2$s button before placing your order. You may be charged more than the amount stated above if you fail to do so.', 'Checkout', 'direct-to-checkout')|format('<em>', '</em>')|e('esc_html') }}
+          <br/>
+          <button type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="{{ _x('Update totals', 'Checkout', 'direct-to-checkout')|e('esc_html') }}">{{ _x('Update totals', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</button>
+        </noscript>
+
+        {{ fn('wc_get_template', 'checkout/terms.php') }}
+
+        {% do action('woocommerce_review_order_before_submit') %}
+        
+        <a href="#" class="uk-button uk-button-default uk-button-small" uk-switcher-item="previous">{{ _x('Back', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
+        
+        {% filter apply_filters('woocommerce_order_button_html') %}
+          <button type="submit" class="button uk-button uk-button-small uk-button-primary alt" name="woocommerce_checkout_place_order" id="place_order" value="{{ _x('Place order', 'Checkout', 'direct-to-checkout')|e('esc_html') }}" data-value="{{ _x('Place order', 'Checkout', 'direct-to-checkout')|e('esc_html') }}">
+            {{ _x('Place order', 'Checkout', 'direct-to-checkout')|e('esc_html') }}
+          </button>
+        {% endfilter %}
+
+        {% do action('woocommerce_review_order_after_submit') %}
+
+        {{ fn('wp_nonce_field', 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce') }}
+        
+      </div>
+      
+    </div>
+
+    {% if not fn('is_ajax') %}
+      {% do action('woocommerce_review_order_after_payment') %}
+    {% endif %}
+    
+  </div>
+</li>

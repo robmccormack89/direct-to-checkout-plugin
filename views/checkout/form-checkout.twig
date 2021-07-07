@@ -1,0 +1,24 @@
+{# translation-ready, escaped, formatted, semantic #}
+<div class="checkout-wrap" data-template="form-checkout.twig">
+  <div class="uk-section uk-section-small uk-container uk-container-small">
+    <form name="checkout" method="post" class="checkout woocommerce-checkout" action="{{ fn('wc_get_checkout_url')|e('esc_url') }}" enctype="multipart/form-data">
+      <div class="form-wrap">
+        {# we need this hidden form inside a div to make nested forms work #}
+        <div hidden><form></form></div>
+        <div class="uk-flex" uk-grid>
+          
+          {# the review order form. on the right side. contains coupon/login stuff. payments moved #}
+          <div class="uk-width-1-2@m half-minus right">
+            {% include '_review.twig' %}
+          </div>
+          
+          {# the billing/shipping/payment walk thru area. shipping fields are currently disabled #}
+          <div class="uk-width-1-2@m uk-flex-first@m half-plus left">
+            {% include 'details.twig' %}
+          </div>
+          
+        </div>
+      </div>
+    </form>
+  </div>
+</div>\

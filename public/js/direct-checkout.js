@@ -3,7 +3,7 @@ jQuery(function($){
     
   // validate billing inputs before proceeding to payment tab
   // should also valiadte these inputs before proceeding from payment form, for cases where accidentally arrive to payment form before billing. can happen
-  $('.proceed-to-payment').click(function(event) {
+  $('.proceed-to-payment, .proceed-to-shipping').click(function(event) {
 
     // the the validate wrapper class & fields to check against
     var fields = $(".validate-required")
@@ -99,10 +99,8 @@ jQuery(function($){
   function theCheckout() {
     // billing fields wrap; make a grid
     $(".woocommerce-billing-fields__field-wrapper").attr("uk-grid", true).addClass("uk-child-width-1-1 uk-grid-small");
-    $(".woocommerce-billing-fields h3").addClass("uk-h4");
     // first name & last name; side by side
-    $(".woocommerce-billing-fields .form-row-first").addClass("uk-width-1-2");
-    $(".woocommerce-billing-fields .form-row-last").addClass("uk-width-1-2");
+    $(".woocommerce-billing-fields .form-row-first, .woocommerce-billing-fields .form-row-last").addClass("uk-width-1-2");
 
     // order review table styles
     $(".woocommerce-checkout-review-order-table").addClass("uk-table uk-table-divider uk-table-small uk-table-justify uk-table-middle");
@@ -112,15 +110,17 @@ jQuery(function($){
 
     // form inputs
     $(".input-radio").addClass("uk-radio");
-    $(".input-text").addClass("uk-input uk-form-small");
-    $(".input-checkbox").addClass("uk-checkbox");
+    $(".billing .input-text, .shipping .input-text, .woocommerce-form-login .input-text").addClass("uk-input uk-form-small");
+    $("textarea").addClass("uk-textarea");
+    $('#order_comments').attr('rows', 5);
+    $(".input-checkbox, .woocommerce-form__input-checkbox").addClass("uk-checkbox");
     $("label").addClass("uk-form-label");
     $("select").addClass("uk-select");
     $(".input-text.qty").removeClass("uk-input uk-form-small");
     // $("input.qty").addClass("uk-input");
     
     // buttons
-    $(".checkout_coupon button").addClass("uk-button uk-button-default uk-button-small");
+    $(".checkout_coupon button, .woocommerce-form-login__submit").addClass("uk-button uk-button-default uk-button-small");
     
     // shipping
     $("#shipping_method").addClass("uk-list");
@@ -167,8 +167,5 @@ jQuery(function($){
     theCheckout();
     newQuantitySelect();
   });
-  
-  // $("form.checkout").load(theCheckout());
-  // $("body").on('DOMSubtreeModified', "form.checkout", theCheckout);
   
 });

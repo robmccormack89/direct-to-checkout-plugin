@@ -20,32 +20,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * custom checkout form template rendered with timber/twig. 
- * this template overwrites woocommerce/templates/checkout/form-checkout.php
- * this template also includes a custom rewrite/insert for woocommerce/templates/checkout/payment.php
+ * this is a custom checkout form template rendered with timber/twig. it overwrites woocommerce/templates/checkout/form-checkout.php
+ *
+ * woocommerce_checkout_payment has been unhooked from woocommerce_checkout_order_review via DirectToCheckout
+ * the new markup for woocommerce_checkout_payment is in payment.twig, & is based off payment.php
+ *
+ * woocommerce_checkout_billing is disabled in _details-billing.twig
+ * used custom markup instead which is based off form-billing.php
  *
 **/
 
 $context = Timber::context();
 
-// billing
-$context['checkout_url'] = esc_url(wc_get_checkout_url());
+// the checkout variable, stores the checkout object
 $context['checkout'] = $checkout;
-$context['checkout_fields'] = $checkout->get_checkout_fields();
 
-// payments
-function cart_needs_payment(){
-	if(WC()->cart->needs_payment()){
-		return true;
-	}
-}
-$context['cart_needs_payment'] = cart_needs_payment();
+// the cart object
+$context['cart'] = WC()->cart;
 
-// gateways
-$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
+// get enabled gateways
 $gateways = WC()->payment_gateways->get_available_payment_gateways();
 $enabled_gateways = [];
-if( $gateways ) {
+if($gateways) {
 	foreach( $gateways as $gateway ) {
 	  if( $gateway->enabled == 'yes' ) {
       $enabled_gateways[] = $gateway;

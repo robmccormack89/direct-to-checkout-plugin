@@ -1,0 +1,20 @@
+<header class="checkout-header checkout-info">
+  <ul class="uk-subnav uk-subnav-pill checkout-nav" uk-switcher="connect: #Switch">
+    <li class="trigger">
+      <a href="#">{{ _x('Billing', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
+    </li>
+    {% if cart.needs_shipping_address() %}
+      <li class="trigger proceed-to-shipping">
+        <a href="#">{{ _x('Shipping', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
+      </li>
+    {% endif %}
+    {% if fn('apply_filters', 'woocommerce_enable_order_notes_field', 'yes' == fn('get_option', 'woocommerce_enable_order_comments', 'yes') ) %}
+      <li class="trigger additional-info">
+        <a href="#">{{ _x('Additional Info', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
+      </li>
+    {% endif %}
+    <li class="trigger proceed-to-payment">
+      <a href="#">{{ _x('Payment', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
+    </li>
+  </ul>
+</header>

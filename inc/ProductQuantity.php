@@ -22,14 +22,15 @@ class ProductQuantity extends Timber {
   }
 
   public function remove_default_quantity_count($cart_item, $cart_item_key) {
+    if (!is_checkout()) return;
     $product_quantity= null;
     return $product_quantity;
   }
   
   public function add_order_item_quantity_select($product_name, $cart_item, $cart_item_key) {
+    if (!is_checkout()) return;
     $_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
-  	if ( is_checkout() ) {
-      if ( $_product->is_sold_individually() ) {
+    if ( $_product->is_sold_individually() ) {
         $product_name .= sprintf('<input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key);
       } else {
         $product_name .= woocommerce_quantity_input( array(
@@ -39,7 +40,6 @@ class ProductQuantity extends Timber {
           'min_value'   => '1'
         ), $_product, true );
       }
-  	}
   	return $product_name;
   }
   

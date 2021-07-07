@@ -1,0 +1,39 @@
+<div id="orderPanel" class="customer-order-review uk-panel uk-panel-scrollable panel-target uk-position-relative panel-collapsed">
+  
+  <!-- before the order review heading hook -->
+  {% do action('woocommerce_checkout_before_order_review_heading') %}
+  
+  <!-- order review heading -->
+  <h3 id="order_review_heading">{{ _x('Your order', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</h3>
+  
+  <!-- order review collpase button: mobile only -->
+  <div class="uk-position-top-right uk-hidden@m order-collapse">
+    <a class="panel-target panel-collapsed uk-link-reset" uk-toggle="target: .panel-target; cls: panel-collapsed"></a>
+  </div>
+  
+  <!-- this has been moved here from the top of form-checkout.php -->
+  <!-- must be logged in message -->
+  {% if not checkout.is_registration_enabled() and checkout.is_registration_required() and not fn('is_user_logged_in') %}
+    <div class="uk-margin-bottom">
+      {% filter apply_filters( 'woocommerce_checkout_must_be_logged_in_message') %}
+        {{ _x('You must be logged in to checkout.', 'Checkout', 'direct-to-checkout')|e('esc_html') }}
+      {% endfilter %}
+    </div>
+  {% endif %}
+  
+  <!-- this has been moved here from the top of form-checkout.php -->
+  <!-- login/registeration & coupons stuff are part of this. double check what goes where tho -->
+  {% do action('woocommerce_before_checkout_form', checkout) %}
+  
+  <!-- before order review -->
+  {% do action('woocommerce_checkout_before_order_review') %}
+
+  <!-- woo order review -->
+  <div id="order_review" class="woocommerce-checkout-review-order uk-margin-top">
+    {% do action('woocommerce_checkout_order_review') %}
+  </div>
+
+  <!-- after order review -->
+  {% do action('woocommerce_checkout_after_order_review') %}
+
+</div>

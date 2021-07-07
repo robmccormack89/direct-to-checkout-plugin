@@ -1,0 +1,43 @@
+{% if cart.needs_shipping_address() %}
+  <li class="checkout-content checkout-shipping">
+    <div class="shipping">
+      
+      {# do action('woocommerce_checkout_shipping') #}
+      
+      <div class="woocommerce-shipping-fields">
+
+    		<h3 id="ship-to-different-address">
+    			<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
+    				<input 
+            id="ship-to-different-address-checkbox" 
+            class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" 
+            {{ fn('checked', fn('apply_filters', 'woocommerce_ship_to_different_address_checked', 'shipping' == fn('get_option', 'woocommerce_ship_to_destination') ? 1 : 0), 1 ) }} 
+            type="checkbox" 
+            name="ship_to_different_address" 
+            value="1" /> 
+            <span>{{ _x('Ship to a different address?', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</span>
+    			</label>
+    		</h3>
+
+    		<div class="shipping_address">
+
+          {% do action('woocommerce_before_checkout_shipping_form', checkout) %}
+
+    			<div class="woocommerce-shipping-fields__field-wrapper">
+            {% set fields = checkout.get_checkout_fields('shipping') %}
+            {% for key,field in fields %}
+              {{fn('woocommerce_form_field', key, field, checkout.get_value(key))}}
+            {% endfor %}
+    			</div>
+
+          {% do action('woocommerce_after_checkout_shipping_form', checkout) %}
+    		</div>
+      </div>
+      
+      <div class="checkout-next-prev-buttons uk-margin-top">
+        <a class="go-back uk-button uk-button-default uk-button-small" uk-switcher-item="previous">{{ _x('Back', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
+        <a class="proceed-to-payment uk-button uk-button-primary uk-button-small" uk-switcher-item="next">{{ _x('Continue', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
+      </div>
+    </div>
+  </li>
+{% endif %}
