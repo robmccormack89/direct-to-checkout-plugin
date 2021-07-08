@@ -13,10 +13,21 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: inc/DirectToCheckout.php:101
+#: inc/DirectToCheckout.php:103, inc/DirectToCheckout.php:126
 msgctxt "Added to cart button text"
 msgid "Go to checkout"
 msgstr ""
+
+#: inc/DirectToCheckout.php:115
+msgctxt "Item name in quotes"
+msgid "&ldquo;%s&rdquo;"
+msgstr ""
+
+#: inc/DirectToCheckout.php:120
+msgid "You have added %s"
+msgid_plural "You have added %s"
+msgstr[0] ""
+msgstr[1] ""
 
 #: inc/ProductRemove.php:26
 msgctxt "Checkout"

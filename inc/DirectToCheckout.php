@@ -93,6 +93,8 @@ class DirectToCheckout extends Timber {
     
     // change the added to cart view basket button link & text
     add_filter( 'woocommerce_get_script_data', array($this, 'change_archives_view_cart_link'),10,2 );
+    
+    add_filter( 'wc_add_to_cart_message_html', array($this, 'added_to_cart_message_html'), 10, 2 );
   }
   
   public function change_archives_view_cart_link($params, $handle) {
@@ -103,6 +105,28 @@ class DirectToCheckout extends Timber {
       break;
     }
     return $params;
+  }
+  
+  public function added_to_cart_message_html( $message, $products ) {
+  
+  	$count = 0;
+  	$titles = array();
+  	foreach ( $products as $product_id => $qty ) {
+  		$titles[] = ( $qty > 1 ? absint( $qty ) . ' &times; ' : '' ) . sprintf( _x( '&ldquo;%s&rdquo;', 'Item name in quotes', 'direct-to-checkout' ), strip_tags( get_the_title( $product_id ) ) );
+  		$count += $qty;
+  	}
+  
+  	$titles     = array_filter( $titles );
+  	$added_text = sprintf( _n(
+  		'You have added %s', // Singular
+  		'You have added %s', // Plural
+  		$count, // Number of products added
+  		'direct-to-checkout' // Textdomain
+  	), wc_format_list_of_items( $titles ) );
+  	$message    = sprintf( '<a href="%s" class="button wc-forward">%s</a> %s', wc_get_checkout_url(), _x( 'Go to checkout', 'Added to cart button text', 'direct-to-checkout' ), esc_html( $added_text ) );
+  
+  
+  	return $message;
   }
   
 }
