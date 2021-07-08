@@ -1,0 +1,39 @@
+// // STANDARD UIKI BUILD; STRAIGHT FROM NODE_MODULES
+// 
+// // 1. customizing uikit variables before build (variables get built in)
+// $offcanvas-bar-background: #fff;
+// $offcanvas-bar-color-mode: none;
+// 
+// // 2. Import uikit variables & mixins
+// @import "node_modules/uikit/src/scss/variables-theme.scss";
+// @import "node_modules/uikit/src/scss/mixins-theme.scss";
+// 
+// // 3. Import uikit theme
+// @import "node_modules/uikit/src/scss/uikit-theme.scss";
+// 
+// // 4. import custom theme sass
+// @import "assets/scss/theme/_import.scss";
+
+// ------------------------------------------------------------
+
+// A CUSTOM UIKIT BUILD WITH SELECTIVE COMPONENTS (ALL SELECTED)
+
+// 1. Import my custom variables & mixins
+@import "public/scss/lib/uikit/variables-theme.scss";
+@import "public/scss/lib/uikit/mixins-theme.scss";
+
+// 2. Import themed uikit components (with custom variables)
+@import "public/scss/lib/uikit/theme/_import.scss";
+
+// 3. custom variable overwrites
+$offcanvas-bar-background: #fff;
+$offcanvas-bar-color-mode: none;
+
+// 4. custom mixin overwrites
+// @import "assets/scss/theme/accordion-mixins.scss";
+
+// 5. Import main uikit components
+@import "public/scss/lib/uikit/_import.base.scss";
+
+// 6. import custom sass styles (uses uikit variables)
+@import "public/scss/theme/_import.scss";

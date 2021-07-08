@@ -13,77 +13,112 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: inc/DirectToCheckout.php:165
+#: inc/DirectToCheckout.php:101
+msgctxt "Added to cart button text"
+msgid "Go to checkout"
+msgstr ""
+
+#: inc/ProductRemove.php:26
 msgctxt "Checkout"
 msgid "Remove this item"
 msgstr ""
 
-#: views/temp/form-checkout.php:21
+#: views/temp/checkout/details/_details-additional.php:8
 msgctxt "Checkout"
-msgid "Your order"
+msgid "Additional information"
 msgstr ""
 
-#: views/temp/form-checkout.php:30
-msgctxt "Checkout"
-msgid "You must be logged in to checkout."
-msgstr ""
-
-#: views/temp/form-checkout.php:52
-msgctxt "Checkout"
-msgid "Billing"
-msgstr ""
-
-#: views/temp/form-checkout.php:53
-msgctxt "Checkout"
-msgid "Payment"
-msgstr ""
-
-#: views/temp/form-checkout.php:57
-msgctxt "Checkout"
-msgid "Information"
-msgstr ""
-
-#: views/temp/form-checkout.php:58
-msgctxt "Checkout"
-msgid "Welcome back"
-msgstr ""
-
-#: views/temp/form-checkout.php:70
+#: views/temp/checkout/details/_details-additional.php:22, views/temp/checkout/details/_details-payment.php:44, views/temp/checkout/details/_details-shipping.php:41
 msgctxt "Checkout"
 msgid "Go back"
 msgstr ""
 
-#: views/temp/form-checkout.php:71
+#: views/temp/checkout/details/_details-additional.php:25, views/temp/checkout/details/_details-billing.php:71, views/temp/checkout/details/_details-shipping.php:44
 msgctxt "Checkout"
-msgid "Proceed to payment"
+msgid "Continue"
 msgstr ""
 
-#: views/temp/form-checkout.php:102
+#: views/temp/checkout/details/_details-billing.php:10
+msgctxt "Checkout"
+msgid "Billing &amp; Shipping"
+msgstr ""
+
+#: views/temp/checkout/details/_details-billing.php:14
+msgctxt "Checkout"
+msgid "Billing details"
+msgstr ""
+
+#: views/temp/checkout/details/_details-billing.php:43
+msgctxt "Checkout"
+msgid "Create an account?"
+msgstr ""
+
+#: views/temp/checkout/details/_details-billing.php:68
+msgctxt "Checkout"
+msgid "Go Back"
+msgstr ""
+
+#: views/temp/checkout/details/_details-header.php:5
+msgctxt "Checkout"
+msgid "Billing"
+msgstr ""
+
+#: views/temp/checkout/details/_details-header.php:9
+msgctxt "Checkout"
+msgid "Shipping"
+msgstr ""
+
+#: views/temp/checkout/details/_details-header.php:14
+msgctxt "Checkout"
+msgid "Additional Info"
+msgstr ""
+
+#: views/temp/checkout/details/_details-header.php:19
+msgctxt "Checkout"
+msgid "Payment"
+msgstr ""
+
+#: views/temp/checkout/details/_details-payment.php:21
 msgctxt "Checkout"
 msgid "Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements."
 msgstr ""
 
-#: views/temp/form-checkout.php:104
+#: views/temp/checkout/details/_details-payment.php:23
 msgctxt "Checkout"
 msgid "Please fill in your details above to see available payment methods."
 msgstr ""
 
-#: views/temp/form-checkout.php:116
+#: views/temp/checkout/details/_details-payment.php:34
 msgctxt "Checkout"
 msgid "Since your browser does not support JavaScript, or it is disabled, please ensure you click the %1$sUpdate Totals%2$s button before placing your order. You may be charged more than the amount stated above if you fail to do so."
 msgstr ""
 
-#: views/temp/form-checkout.php:118, views/temp/form-checkout.php:118
+#: views/temp/checkout/details/_details-payment.php:36, views/temp/checkout/details/_details-payment.php:36
 msgctxt "Checkout"
 msgid "Update totals"
 msgstr ""
 
-#: views/temp/form-checkout.php:125
-msgctxt "Checkout"
-msgid "Back to billing"
-msgstr ""
-
-#: views/temp/form-checkout.php:128, views/temp/form-checkout.php:128, views/temp/form-checkout.php:129
+#: views/temp/checkout/details/_details-payment.php:48, views/temp/checkout/details/_details-payment.php:48, views/temp/checkout/details/_details-payment.php:49
 msgctxt "Checkout"
 msgid "Place order"
+msgstr ""
+
+#: views/temp/checkout/details/_details-shipping.php:9
+msgctxt "Checkout"
+msgid "Shipping Details"
+msgstr ""
+
+#: views/temp/checkout/details/_details-shipping.php:20
+msgctxt "Checkout"
+msgid "Ship to a different address?"
+msgstr ""
+
+#: views/temp/checkout/_review.php:7
+msgctxt "Checkout"
+msgid "Your order"
+msgstr ""
+
+#: views/temp/checkout/_review.php:19
+msgctxt "Checkout"
+msgid "You must be logged in to checkout."
 msgstr ""

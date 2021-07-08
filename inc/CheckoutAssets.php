@@ -65,19 +65,21 @@ class CheckoutAssets {
   
   public function remove_woo_script_styles() {
     if (!is_checkout()) return;
-
     remove_action('wp_head', array( $GLOBALS['woocommerce'], 'generator' ) );
-    wp_dequeue_style( 'woocommerce_frontend_styles' );
-    wp_dequeue_style( 'woocommerce-general');
-    wp_dequeue_style( 'woocommerce-layout' );
-    wp_dequeue_style( 'woocommerce-smallscreen' );
-    wp_dequeue_style( 'woocommerce_fancybox_styles' );
-    wp_dequeue_style( 'woocommerce_chosen_styles' );
-    wp_dequeue_style( 'woocommerce_prettyPhoto_css' );
-    wp_dequeue_script( 'selectWoo' );
-    wp_deregister_script( 'selectWoo' );
-    wp_dequeue_script( 'select2' );
-    wp_deregister_script( 'select2' );
+    wp_dequeue_style('woocommerce_frontend_styles');
+    wp_dequeue_style('woocommerce-general');
+    wp_dequeue_style('woocommerce-layout');
+    wp_dequeue_style('woocommerce-smallscreen');
+    wp_dequeue_style('woocommerce_fancybox_styles');
+    wp_dequeue_style('woocommerce_chosen_styles');
+    wp_dequeue_style('woocommerce_prettyPhoto_css');
+    wp_dequeue_script('selectWoo');
+    wp_deregister_script('selectWoo');
+    wp_dequeue_script('select2');
+    wp_deregister_script('select2');
+    wp_dequeue_style('select2'); // doesnt seem needed
+    wp_dequeue_style('wc-block-style');
+    wp_dequeue_style('wc-block-vendors-style');
   }
   
   public function remove_theme_all_scripts() {

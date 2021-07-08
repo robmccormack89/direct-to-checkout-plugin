@@ -81,10 +81,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* turn offs */
-.added_to_cart, 
 .screen-reader-text, 
 label[for=coupon_code] {
-  /* display: none!important; */
+  display: none!important;
 }
 
 /* checkout page split bg design */
@@ -110,7 +109,7 @@ label[for=coupon_code] {
 }
 
 /* order review table */
-.woocommerce-form-coupon-toggle, .woocommerce-checkout-review-order-table {
+.woocommerce-form-coupon-toggle, .woocommerce-checkout-review-order-table, .woocommerce-form-login-toggle, .woocommerce-form-login {
   font-size: 0.875em;
 }
 .uk-table-small td, .uk-table-small th {
@@ -211,7 +210,7 @@ abbr.required {
 }
 
 /* billing payment checkout header nav separator */
-li.proceed-to-payment:before, li.proceed-to-shipping:before, li.additional-info:before  {
+.checkout-header ul li:not(:first-child):before {
   content: "\f105";
   font-family: 'Font Awesome 5 Free';
   position: absolute;
@@ -226,7 +225,7 @@ li.proceed-to-payment:before, li.proceed-to-shipping:before, li.additional-info:
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
 }
-li.proceed-to-payment a, li.proceed-to-shipping a, li.additional-info a {
+.checkout-header ul li:not(:first-child) a {
   margin-left: 15px;
 }
 
@@ -310,4 +309,14 @@ li.proceed-to-payment a, li.proceed-to-shipping a, li.additional-info a {
 /* order review item name */
 .item-name {
   min-width: 55px;
+}
+
+
+/* reduce input height */
+.uk-input, .uk-select:not([multiple]):not([size]) {
+  height: 30px;
+}
+/* reduce text input height */
+.uk-form-small:not(textarea):not([multiple]):not([size]) {
+  height: 28px;
 }

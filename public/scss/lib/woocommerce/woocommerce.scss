@@ -1,0 +1,199 @@
+/**
+ * woocommerce.scss
+ * Governs the general look and feel of WooCommerce sections of stores using themes that do not
+ * integrate with WooCommerce specifically.
+ */
+
+/**
+ * Imports
+ */
+@import "woomixins";
+@import "woovariables";
+@import "wooanimation";
+
+/**
+ * Global styles - deleted
+ */
+
+/**
+ * Utility classes - deleted
+ */
+
+/**
+ * Main WooCommerce styles - edited
+ */
+.woocommerce {
+
+	.blockUI.blockOverlay {
+		position: relative;
+
+		@include loader();
+	}
+
+	.loader {
+
+		@include loader();
+	}
+
+	/**
+	 * Product Page - deleted
+	 */
+
+	/**
+	 * Product loops - deleted
+	 */
+
+	/**
+	 * Buttons - edited
+	 */
+	a.button,
+	button.button,
+	input.button,
+	#respond input#submit {
+
+		&.loading {
+			opacity: 0.25;
+			padding-right: 2.618em;
+
+			&::after {
+		    font-family: WooCommerce;
+		    content: "\e01c";
+		    vertical-align: top;
+		    font-weight: 400;
+		    position: absolute;
+				margin-left: 0.53em;
+		    -webkit-animation: spin 2s linear infinite;
+		    animation: spin 2s linear infinite;
+			}
+		}
+
+	}
+
+	/**
+	 * Reviews - deleted
+	 */
+
+	 /**
+ 	 * Star ratings - deleted
+ 	 */
+
+	/**
+	 * Tables - deleted
+	 */
+
+	/**
+	 * Cart sidebar - deleted
+	 */
+
+	/**
+	 * Forms - deleted
+	 */
+
+	/**
+	 * Order page - deleted
+	 */
+
+	/**
+	 * Layered nav widget - deleted
+	 */
+
+	/**
+	 * Price filter widget - deleted
+	 */
+
+	/**
+	 * Rating Filter Widget - deleted
+	 */
+
+}
+
+// .woocommerce-no-js {
+// 
+// 	form.woocommerce-form-login,
+// 	form.woocommerce-form-coupon {
+// 		display: block !important;
+// 	}
+// 
+// 	.woocommerce-form-login-toggle,
+// 	.woocommerce-form-coupon-toggle,
+// 	.showcoupon {
+// 		display: none !important;
+// 	}
+// }
+
+// .woocommerce-message,
+// .woocommerce-error,
+// .woocommerce-info {
+// 	padding: 1em 2em 1em 3.5em;
+// 	margin: 0 0 2em;
+// 	position: relative;
+// 	background-color: lighten($secondary, 5%);
+// 	color: $secondarytext;
+// 	border-top: 3px solid $primary;
+// 	list-style: none outside;
+// 
+// 	@include clearfix();
+// 	width: auto;
+// 	word-wrap: break-word;
+// 
+// 	&::before {
+// 		font-family: "WooCommerce";
+// 		content: "\e028";
+// 		display: inline-block;
+// 		position: absolute;
+// 		top: 1em;
+// 		left: 1.5em;
+// 	}
+// 
+// 	.button {
+// 		float: right;
+// 	}
+// 
+// 	li {
+// 		list-style: none outside !important; // Required for default theme compatibility
+// 		padding-left: 0 !important; // Required for default theme compatibility
+// 		margin-left: 0 !important; // Required for default theme compatibility
+// 	}
+// }
+
+/**
+ * Right to left styles - deleted
+ */
+
+// .woocommerce-message {
+// 	border-top-color: #8fae1b;
+// 
+// 	&::before {
+// 		content: "\e015";
+// 		color: #8fae1b;
+// 	}
+// }
+
+// .woocommerce-info {
+// 	border-top-color: #1e85be;
+// 
+// 	&::before {
+// 		color: #1e85be;
+// 	}
+// }
+
+// .woocommerce-error {
+// 	border-top-color: #b81c23;
+// 
+// 	&::before {
+// 		content: "\e016";
+// 		color: #b81c23;
+// 	}
+// }
+
+/**
+ * Account page - deleted
+ */
+
+/**
+ * Cart/checkout page - deleted
+ */
+
+/**
+ * Password strength meter - deleted
+ */

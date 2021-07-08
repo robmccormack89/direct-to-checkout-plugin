@@ -63,9 +63,14 @@
     	</div>
     {% endif %}
     
-    <div class="checkout-next-prev-buttons uk-margin-top">
-      <a id="backBrowser" class="go-back uk-button uk-button-default uk-button-small" href="{{back_link|e('esc_url')}}">{{ _x('Back', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
-      <a id="proceedPayment" class="proceed-to-payment uk-button uk-button-primary uk-button-small" uk-switcher-item="next">{{ _x('Continue', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
+    <div class="uk-margin-top">
+      <a class="go-back uk-button uk-button-text uk-margin-small-right" href="{{back_link|e('esc_url')}}">
+        {{ _x('Go Back', 'Checkout', 'direct-to-checkout')|e('esc_html') }}
+      </a>
+      <a class="proceed-from-billing uk-button uk-button-primary uk-button-small" uk-switcher-item="next">
+        {{ _x('Continue', 'Checkout', 'direct-to-checkout')|e('esc_html') }} <i class="fas fa-angle-right"></i>
+      </a>
     </div>
+    
   </div>
 </li>

@@ -40,7 +40,9 @@
 
         {% do action('woocommerce_review_order_before_submit') %}
         
-        <a href="#" class="uk-button uk-button-default uk-button-small" uk-switcher-item="previous">{{ _x('Back', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
+        <a href="#" class="go-back uk-button uk-button-text uk-margin-small-right" uk-switcher-item="previous">
+          {{ _x('Go back', 'Checkout', 'direct-to-checkout')|e('esc_html') }}
+        </a>
         
         {% filter apply_filters('woocommerce_order_button_html') %}
           <button type="submit" class="button uk-button uk-button-small uk-button-primary alt" name="woocommerce_checkout_place_order" id="place_order" value="{{ _x('Place order', 'Checkout', 'direct-to-checkout')|e('esc_html') }}" data-value="{{ _x('Place order', 'Checkout', 'direct-to-checkout')|e('esc_html') }}">

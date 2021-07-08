@@ -90,6 +90,19 @@ class DirectToCheckout extends Timber {
     
     // Make “Create an account” to be default Checked
     // add_filter('woocommerce_create_account_default_checked', '__return_true');
+    
+    // change the added to cart view basket button link & text
+    add_filter( 'woocommerce_get_script_data', array($this, 'change_archives_view_cart_link'),10,2 );
+  }
+  
+  public function change_archives_view_cart_link($params, $handle) {
+    switch ($handle) {
+      case 'wc-add-to-cart':
+        $params['i18n_view_cart'] = _x( 'Go to checkout', 'Added to cart button text', 'direct-to-checkout' ); //chnage Name of view cart button
+        $params['cart_url'] = wc_get_checkout_url();
+      break;
+    }
+    return $params;
   }
   
 }

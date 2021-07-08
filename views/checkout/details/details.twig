@@ -1,19 +1,19 @@
 {% include '_details-header.twig' %}
 
-{% if checkout.get_checkout_fields() %}
-  <div class="customer-billing-shipping">
-    <ul id="Switch" class="uk-switcher uk-margin">
-      
+<div class="customer-billing-shipping">
+  <ul id="Switch" class="uk-switcher uk-margin">
+    
+    {% if checkout.get_checkout_fields() %}
+    
       {% include '_details-billing.twig' %}
-      
       {% include '_details-shipping.twig' %}
-      
       {% include '_details-additional.twig' %}
-      
-      {% include '_details-payment.twig' %}
-      
-    </ul>
-  </div>
-{% endif %}
+    
+    {% endif %}
+    
+    {% include '_details-payment.twig' %}
+    
+  </ul>
+</div>
 
 {% include '_details-footer.twig' %}

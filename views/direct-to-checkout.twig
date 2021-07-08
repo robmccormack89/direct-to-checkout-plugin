@@ -13,11 +13,52 @@
     {{ function('wp_head') }}
     <!-- /wp head -->
     
+    <style>
+      .preloader::before {
+        content: "";
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 45vh;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80px;
+        height: 80px;
+        border: 2px solid #f3f3f3;
+        border-top: 3px solid #525252;
+        border-radius: 100%;
+        will-change: transform;
+        animation: spin 1s infinite linear;
+        z-index: 5;
+      }
+      .preloader::after {
+        content: '';
+        position: fixed;
+        background-color: #ffffff;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 4;
+      }
+      .preloader {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity .3s linear;
+      }
+      .preloader.hidden {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        z-index: 3;
+      }
+    </style>
   </head>
   <!-- /head of document -->
 
   <!-- the body of the document with body classes -->
-  <body class="{{body_class|e('esc_html')}}" data-template="direct-to-checkout.twig">
+  <body class="{{body_class|e('esc_html')}} no-overflow" data-template="direct-to-checkout.twig">
+    <div id="Preloader" class="preloader"></div>
     
     <!-- main with post content -->
     <main role="main" id="MainContent">
@@ -32,6 +73,12 @@
     {{ function('wp_footer') }}
     <!-- /wp footer -->
     
+    <script>
+      window.onload = function(){
+        document.getElementById("Preloader").classList.add("hidden");
+        document.getElementsByTagName("BODY")[0].classList.remove("no-overflow");
+      }
+    </script>
   </body>
   <!-- /body of document -->
 

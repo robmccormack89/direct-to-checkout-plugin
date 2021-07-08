@@ -5,8 +5,10 @@
       {# do action('woocommerce_checkout_shipping') #}
       
       <div class="woocommerce-shipping-fields">
-
-    		<h3 id="ship-to-different-address">
+        
+        <h3>{{ _x('Shipping Details', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</h3>
+        
+        <h3 id="ship-to-different-address" class="uk-margin-remove-top">
     			<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
     				<input 
             id="ship-to-different-address-checkbox" 
@@ -34,10 +36,15 @@
     		</div>
       </div>
       
-      <div class="checkout-next-prev-buttons uk-margin-top">
-        <a class="go-back uk-button uk-button-default uk-button-small" uk-switcher-item="previous">{{ _x('Back', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
-        <a class="proceed-to-payment uk-button uk-button-primary uk-button-small" uk-switcher-item="next">{{ _x('Continue', 'Checkout', 'direct-to-checkout')|e('esc_html') }}</a>
+      <div class="uk-margin-top">
+        <a class="go-back uk-button uk-button-text uk-margin-small-right" uk-switcher-item="previous">
+          {{ _x('Go back', 'Checkout', 'direct-to-checkout')|e('esc_html') }}
+        </a>
+        <a class="proceed-from-shipping uk-button uk-button-primary uk-button-small" uk-switcher-item="next">
+          {{ _x('Continue', 'Checkout', 'direct-to-checkout')|e('esc_html') }} <i class="fas fa-angle-right"></i>
+        </a>
       </div>
+      
     </div>
   </li>
 {% endif %}
