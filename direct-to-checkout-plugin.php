@@ -21,20 +21,23 @@ if (!defined('DIRECT_TO_CHECKOUT_PATH')) define('DIRECT_TO_CHECKOUT_PATH', plugi
 if (!defined('DIRECT_TO_CHECKOUT_URL')) define('DIRECT_TO_CHECKOUT_URL', plugin_dir_url( __FILE__ ));
 if (!defined('DIRECT_TO_CHECKOUT_BASE')) define('DIRECT_TO_CHECKOUT_BASE', dirname(plugin_basename( __FILE__ )));
 
-// require the composer autoloader
-if (file_exists($composer_autoload = __DIR__.'/vendor/autoload.php')) require_once $composer_autoload;
-
-// then require the main plugin class. this class extends Timber/Timber which is required via composer
-new Rmcc\DirectToCheckout;
-
-// initialize the assets class. for styles & scripts management
-new Rmcc\CheckoutAssets;
-
-// initialize the checkout fields class. for managing the checkout fields stuff
-new Rmcc\CheckoutFields;
-
-// initialize the order item removal class. for removing items from the order form via ajax
-new Rmcc\ProductRemove;
-
-// initialize the order item quantity select class. for changing order items quantity on checkout via ajax
-new Rmcc\ProductQuantity;
+// if Woo class exists, do some stuff
+if (class_exists( 'WooCommerce')) {
+  // require the composer autoloader
+  if (file_exists($composer_autoload = __DIR__.'/vendor/autoload.php')) require_once $composer_autoload;
+  
+  // then require the main plugin class. this class extends Timber/Timber which is required via composer
+  new Rmcc\DirectToCheckout;
+  
+  // initialize the assets class. for styles & scripts management
+  new Rmcc\CheckoutAssets;
+  
+  // initialize the checkout fields class. for managing the checkout fields stuff
+  new Rmcc\CheckoutFields;
+  
+  // initialize the order item removal class. for removing items from the order form via ajax
+  new Rmcc\ProductRemove;
+  
+  // initialize the order item quantity select class. for changing order items quantity on checkout via ajax
+  new Rmcc\ProductQuantity;
+}
