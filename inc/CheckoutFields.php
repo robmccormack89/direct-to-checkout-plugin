@@ -4,11 +4,6 @@ namespace Rmcc;
 class CheckoutFields {
 
   public function __construct() {
-    // after plugins are loaded, do this...
-    add_action('plugins_loaded', array($this, 'checkout_fields_plugins_loaded'));
-  }
-  
-  public function checkout_fields_plugins_loaded() {
     add_filter('woocommerce_checkout_fields', array($this, 'unset_checkout_fields'));
     add_filter('woocommerce_checkout_get_value', array($this, 'checkout_fields_pre_values'), 10, 2);
   }
@@ -45,6 +40,7 @@ class CheckoutFields {
     // return thr remaining
     return $fields;
   }
+  
   public function checkout_fields_pre_values($input, $key) {
     global $current_user;
 

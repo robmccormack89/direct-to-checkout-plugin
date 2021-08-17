@@ -4,11 +4,6 @@ namespace Rmcc;
 class ProductRemove {
 
   public function __construct() {
-    // after plugins are loaded, do this...
-    add_action('plugins_loaded', array($this, 'product_remove_plugins_loaded'));
-  }
-  
-  public function product_remove_plugins_loaded() {
     add_filter('woocommerce_cart_item_name', array($this, 'woo_checkout_order_item_remove'), 10, 3);
     add_action('wp_ajax_product_remove', array($this, 'custom_ajax_product_remove'));
     add_action('wp_ajax_nopriv_product_remove', array($this, 'custom_ajax_product_remove'));
@@ -16,7 +11,7 @@ class ProductRemove {
   
   // allows removal of products in checkout
   public function woo_checkout_order_item_remove($product_name, $cart_item, $cart_item_key) {
-    if (!is_checkout()) return;
+    if (!is_checkout()) return $product_name;
     
     $_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);      
     $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);

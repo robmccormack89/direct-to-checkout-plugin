@@ -4,11 +4,6 @@ namespace Rmcc;
 class CheckoutAssets {
 
   public function __construct() {
-    // after plugins are loaded, do this...
-    add_action('plugins_loaded', array($this, 'checkout_assets_plugins_loaded'));
-  }
-  
-  public function checkout_assets_plugins_loaded() {
     // enqueue the plugin scripts & styles.
     add_action('wp_enqueue_scripts', array($this, 'direct_checkout_assets'), 99);
     
@@ -62,7 +57,6 @@ class CheckoutAssets {
       )
     );
   }
-  
   public function remove_woo_script_styles() {
     if (!is_checkout()) return;
     remove_action('wp_head', array( $GLOBALS['woocommerce'], 'generator' ) );
@@ -81,7 +75,6 @@ class CheckoutAssets {
     wp_dequeue_style('wc-block-style');
     wp_dequeue_style('wc-block-vendors-style');
   }
-  
   public function remove_theme_all_scripts() {
     if (!is_checkout()) return;
     
@@ -104,7 +97,6 @@ class CheckoutAssets {
     
     $wp_scripts->queue = $new_scripts_list;
   }
-  
   public function remove_theme_all_styles() {
     if (!is_checkout()) return;
     

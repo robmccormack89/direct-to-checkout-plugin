@@ -4,11 +4,6 @@ namespace Rmcc;
 class CheckoutRedirects {
 
   public function __construct() {
-    // after plugins are loaded, do this...
-    add_action('plugins_loaded', array($this, 'checkout_redirects_plugins_loaded'));
-  }
-  
-  public function checkout_redirects_plugins_loaded() {
     add_filter('woocommerce_login_redirect', array($this, 'login_redirect_to_checkout_with_cart'));
     add_filter('add_to_cart_redirect', array($this, 'redirect_to_checkout_from_single'));
     add_action('template_redirect', array($this, 'cart_empty_redirect_to_shop'));

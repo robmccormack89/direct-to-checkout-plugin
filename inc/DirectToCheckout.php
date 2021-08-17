@@ -81,19 +81,38 @@ class DirectToCheckout extends Timber {
   
   // basically prepatory work to be done before anything more comprehensive
   public function direct_to_checkout_prep() {
+    
+    // initialize the assets class. for styles & scripts management
+    new CheckoutAssets;
+    
+    // initialize the checkout fields class. for managing the checkout fields stuff
+    new CheckoutFields;
+    
+    // initialize the order item removal class. for removing items from the order form via ajax
+    new ProductRemove;
+    
+    // initialize the order item quantity select class. for changing order items quantity on checkout via ajax
+    new ProductQuantity;
+    
+    // the redirects setup
+    new CheckoutRedirects;
+    
     // remove basket button from minicart
     remove_action('woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_shopping_cart_button_view_cart', 10);
+    
     // remove payments from order review. the markup for this is added back in manually. see direct-to-checkout.twig
     remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
+    
     // disable order notes from the checkout
-    // add_filter('woocommerce_enable_order_notes_field', '__return_false');
+    add_filter('woocommerce_enable_order_notes_field', '__return_false');
     
     // Make “Create an account” to be default Checked
-    // add_filter('woocommerce_create_account_default_checked', '__return_true');
+    add_filter('woocommerce_create_account_default_checked', '__return_true');
     
     // change the added to cart view basket button link & text
     add_filter( 'woocommerce_get_script_data', array($this, 'change_archives_view_cart_link'),10,2 );
     
+    // added to cart message: change link to checkout
     add_filter( 'wc_add_to_cart_message_html', array($this, 'added_to_cart_message_html'), 10, 2 );
   }
   
