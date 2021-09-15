@@ -4,6 +4,22 @@
 *
 */
 
+.woocommerce-checkout .woocommerce p:nth-child(2):not(.form-row) {
+  margin: 0;
+  text-align: center;
+  margin-top: 50vh!important;
+  padding: 0 20px;
+}
+.woocommerce-checkout .woocommerce p:nth-child(3):not(.form-row) {
+  margin: 0;
+  text-align: center;
+  margin-top: 10px;
+  padding: 0 20px;
+}
+.woocommerce-NoticeGroup.woocommerce-NoticeGroup-checkout {
+  width: 50%;
+}
+
 /* text colours */
 html {
   color: #3a3a3a;

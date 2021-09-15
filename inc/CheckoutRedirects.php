@@ -28,7 +28,9 @@ class CheckoutRedirects {
     global $woocommerce;
 
     // Remove the default `Added to cart` message
-    wc_clear_notices();
+    if(is_checkout()){
+      wc_clear_notices();
+    }
 
     return $woocommerce->cart->get_checkout_url();
   
@@ -37,6 +39,7 @@ class CheckoutRedirects {
   // if cart is empty, redirect to shop page
   public function cart_empty_redirect_to_shop() {
     if (!is_checkout()) return;
+    if (is_checkout() && !empty(is_wc_endpoint_url('order-received'))) return;
     if (0 == WC()->cart->get_cart_contents_count()) {
       wp_safe_redirect( get_permalink(woocommerce_get_page_id('shop')) );
       exit;

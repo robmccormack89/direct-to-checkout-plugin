@@ -108,16 +108,27 @@ jQuery(function($) {
 
   });
 
+  var check;
+  $(".proceed-from-shipping").on("click", function(event){
+    check = $("#ship-to-different-address-checkbox").is(":checked");
+    if(check) {
+      // set the validate wrapper class & fields to check against. billing fields in this case
+      var shipping_fields = $(".shipping .validate-required").find("select, textarea, input").serializeArray();
+      // validate the fields!!! see above function
+      stopWhenRequiredsExist(shipping_fields);
+    }
+  }); 
+
   // validate inputs before proceeding from shipping tab
-  $('.proceed-from-shipping').click(function(event) {
-
-    // set the validate wrapper class & fields to check against. billing fields in this case
-    var shipping_fields = $(".shipping .validate-required").find("select, textarea, input").serializeArray();
-
-    // validate the fields!!! see above function
-    stopWhenRequiredsExist(shipping_fields);
-
-  });
+  // $('.proceed-from-shipping').click(function(event) {
+  // 
+  //   // set the validate wrapper class & fields to check against. billing fields in this case
+  //   var shipping_fields = $(".shipping .validate-required").find("select, textarea, input").serializeArray();
+  // 
+  //   // validate the fields!!! see above function
+  //   stopWhenRequiredsExist(shipping_fields);
+  // 
+  // });
 
   // validate inputs before proceeding from additional tab
   $('.proceed-from-additional').click(function(event) {

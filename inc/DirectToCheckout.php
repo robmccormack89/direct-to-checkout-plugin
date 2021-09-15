@@ -12,8 +12,10 @@ class DirectToCheckout extends Timber {
     add_action('init', array($this, 'plugin_text_domain_init')); 
     add_filter('wc_get_template', array($this, 'wc_get_template'), 10, 5);
     add_filter('page_template', array($this, 'direct_to_checkout_template'));
+    
     // after plugins are loaded, do this...
     add_action('plugins_loaded', array($this, 'direct_to_checkout_prep'));
+    add_action('wp', array($this, 'direct_to_checkout_pre_wp'));
   }
   
   // timber stuff. the usual stuff
@@ -73,7 +75,7 @@ class DirectToCheckout extends Timber {
   // override the template used for the checkout page. would be page.php from the theme but for this
   public function direct_to_checkout_template($page_template) {
     // if is the checkout page, use the new template
-    if (is_checkout()) {
+    if (is_checkout() && empty(is_wc_endpoint_url('order-received'))) {
       $page_template = DIRECT_TO_CHECKOUT_PATH . 'templates/direct-to-checkout-template.php';
     }
     return $page_template;
@@ -81,39 +83,36 @@ class DirectToCheckout extends Timber {
   
   // basically prepatory work to be done before anything more comprehensive
   public function direct_to_checkout_prep() {
-    
-    // initialize the assets class. for styles & scripts management
-    new CheckoutAssets;
-    
-    // initialize the checkout fields class. for managing the checkout fields stuff
-    new CheckoutFields;
-    
+    // the redirects setup. global
+    new CheckoutRedirects;
     // initialize the order item removal class. for removing items from the order form via ajax
     new ProductRemove;
-    
     // initialize the order item quantity select class. for changing order items quantity on checkout via ajax
     new ProductQuantity;
-    
-    // the redirects setup
-    new CheckoutRedirects;
-    
     // remove basket button from minicart
     remove_action('woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_shopping_cart_button_view_cart', 10);
-    
-    // remove payments from order review. the markup for this is added back in manually. see direct-to-checkout.twig
-    remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
-    
-    // disable order notes from the checkout
-    add_filter('woocommerce_enable_order_notes_field', '__return_false');
-    
-    // Make “Create an account” to be default Checked
-    add_filter('woocommerce_create_account_default_checked', '__return_true');
-    
     // change the added to cart view basket button link & text
     add_filter( 'woocommerce_get_script_data', array($this, 'change_archives_view_cart_link'),10,2 );
-    
     // added to cart message: change link to checkout
     add_filter( 'wc_add_to_cart_message_html', array($this, 'added_to_cart_message_html'), 10, 2 );
+  }
+  // basically prepatory work to be done before anything more comprehensive
+  public function direct_to_checkout_pre_wp() {
+    // checkout specific, or at least not on the orer received page
+    if (empty(is_wc_endpoint_url('order-received'))) {
+      if (is_checkout()) {
+        // initialize the assets class. for styles & scripts management
+        new CheckoutAssets;
+        // initialize the checkout fields class. for managing the checkout fields stuff
+        new CheckoutFields;
+        // remove payments from order review. the markup for this is added back in manually. see direct-to-checkout.twig
+        remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
+        // disable order notes from the checkout
+        add_filter('woocommerce_enable_order_notes_field', '__return_false');
+        // Make “Create an account” to be default Checked
+        add_filter('woocommerce_create_account_default_checked', '__return_true');
+      }
+    }
   }
   
   public function change_archives_view_cart_link($params, $handle) {
