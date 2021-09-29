@@ -67,7 +67,7 @@ jQuery(function($) {
 
   // a new sexy quantity selecter
   function quantitySelectButtons() {
-    $('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input');
+    $('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter(".quantity input[type!='hidden']");
     $('.quantity').each(function() {
       var spinner = jQuery(this),
         input = spinner.find('input[type="number"]'),

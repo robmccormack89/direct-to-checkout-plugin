@@ -5,7 +5,7 @@ class CheckoutRedirects {
 
   public function __construct() {
     add_filter('woocommerce_login_redirect', array($this, 'login_redirect_to_checkout_with_cart'));
-    add_filter('add_to_cart_redirect', array($this, 'redirect_to_checkout_from_single'));
+    add_filter('woocommerce_add_to_cart_redirect', array($this, 'redirect_to_checkout_from_single'));
     add_action('template_redirect', array($this, 'cart_empty_redirect_to_shop'));
   }
   
@@ -15,7 +15,7 @@ class CheckoutRedirects {
     global $woocommerce;
   
     if(!(WC()->cart->get_cart_contents_count() == 0)){
-      return $woocommerce->cart->get_checkout_url();
+      return wc_get_checkout_url();
     } else {
       return wc_get_page_permalink('shop');
     }
@@ -32,7 +32,7 @@ class CheckoutRedirects {
       wc_clear_notices();
     }
 
-    return $woocommerce->cart->get_checkout_url();
+    return wc_get_checkout_url();
   
   }
   
