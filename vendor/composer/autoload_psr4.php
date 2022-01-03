@@ -12,5 +12,5 @@ return array(
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Rmcc\\' => array($baseDir . '/inc', $baseDir . '/inc/classes'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
-    '' => array($vendorDir . '/asm89/twig-cache-extension/lib'),
+    '' => array($vendorDir . '/twig/cache-extension/lib'),
 );

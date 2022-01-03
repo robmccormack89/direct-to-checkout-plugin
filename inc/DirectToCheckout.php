@@ -28,8 +28,11 @@ class DirectToCheckout extends Timber {
   public function add_to_context($context) {
     $context['site'] = new \Timber\Site;
     $context['direct_to_checkout_url'] = DIRECT_TO_CHECKOUT_URL;
-    // the last page
-    $context['back_link'] = $_SERVER['HTTP_REFERER'];
+    $back_link = '/';
+    if (is_checkout() && !empty($_SERVER['HTTP_REFERER'])){
+      $back_link = $_SERVER['HTTP_REFERER'];
+    }
+    $context['back_link'] = $back_link;
     return $context;    
   }
   
